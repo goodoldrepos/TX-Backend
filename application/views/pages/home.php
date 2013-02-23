@@ -32,28 +32,28 @@
 		}
     </style>
     <div class="formulaire" >
-    	<?php echo form_open('reservation/immediat') ?>
+    	<?php echo form_open('reservations/immediate') ?>
 			<fieldset>
     		<legend>Demande immédiate</legend>
 			<label>Départ</label>
 				
-					<input type="text" placeholder="Ville" />
-					<input type="text" placeholder="Rue" />
+					<input type="text" name="ville" placeholder="Ville" />
+					<input type="text" name="rue" placeholder="Rue" />
 				
-					<input type="text" placeholder="CP" />
+					<input type="text" name="code_postale" placeholder="CP" />
 				
 			<label>Destination</label>
-			<input type="text" placeholder="Rue" />	
+			<input type="text" name="destination" placeholder="Rue" />	
 			<label>Nombre de passagers</label>
-			<select>
-				<option>1</option>
-				<option>2</option>
+			<select name="nombre_passagers">
+				<option name="1" >1</option>
+				<option name="2" >2</option>
 			</select>
 			<br/><br/>
 			<label>Nombre de bagages</label>
-			<select>
-				<option>1</option>
-				<option>2</option>
+			<select name="nombre_bagages">
+				<option name="1" >1</option>
+				<option name="2" >2</option>
 			</select>
 			<br/><br/>
 			<input type="submit" class="small button right" value="Continuer" >

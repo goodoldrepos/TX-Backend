@@ -23,7 +23,7 @@ class Users extends CI_Controller{
                   ->create_user();
 
          
-         	$this->session->set_userdata('username', $this->input->post('email'));
+         	$this->session->set_userdata('user_id', $res->id);
             redirect('pages/home');
        
       	}	

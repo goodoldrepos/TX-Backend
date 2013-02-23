@@ -22,7 +22,7 @@ class Sessions extends CI_Controller{
                   );
 
          if ( $res !== false ) {
-            $this->session->set_userdata('username', $this->input->post('email'));
+            $this->session->set_userdata('user_id', $res->id);
             redirect('pages/home');
          }
 
@@ -34,7 +34,7 @@ class Sessions extends CI_Controller{
 
 
 	public function destroy(){
-		$this->session->unset_userdata('username');
+		$this->session->unset_userdata('user_id');
 		redirect('pages/home');
 	}
 
