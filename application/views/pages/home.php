@@ -4,9 +4,7 @@
    });
 </script>
 
-    <img class="banner" src="<?php echo base_url() ?>images/paris.jpg" />
-
-    <style type="text/css">
+	<style type="text/css">
     	.formulaire{
     		width:300px;
     		position: relative;
@@ -29,19 +27,24 @@
     	}
     	.banner{
     		position:relative;
+    		width:100%;
 		}
     </style>
+
+
+    <div class="banner"></div>
+    <img class="banner" src="<?php echo base_url() ?>images/paris.jpg" />
+
+    
     <div class="formulaire" >
+    	<?php echo validation_errors(); ?>
     	<?php echo form_open('reservations/immediate') ?>
 			<fieldset>
     		<legend>Demande immédiate</legend>
 			<label>Départ</label>
-				
 					<input type="text" name="ville" placeholder="Ville" />
 					<input type="text" name="rue" placeholder="Rue" />
-				
-					<input type="text" name="code_postale" placeholder="CP" />
-				
+					<input type="text" name="code_postale" placeholder="Code Postale" />
 			<label>Destination</label>
 			<input type="text" name="destination" placeholder="Rue" />	
 			<label>Nombre de passagers</label>

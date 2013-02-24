@@ -13,7 +13,9 @@ class User_model extends CI_Model{
                 'telephone' 	=>    $this->input->post('telephone'),
 		);
 
-		return $this->db->insert('utilisateurs', $data);
+		$this->db->insert('utilisateurs', $data);
+
+		return $this->db->insert_id();
 
 	}
 

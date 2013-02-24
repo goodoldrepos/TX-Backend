@@ -27,6 +27,7 @@ class Sessions extends CI_Controller{
          }
 
       }
+      
       $this->load->view('templates/header');
       $this->load->view('sessions/create');
       $this->load->view('templates/footer');

@@ -1,6 +1,12 @@
 <?php 
 
-class Pages extends CI_Controller{
+class Pages extends CI_Controller {
+
+	public function __construct(){
+		parent::__construct();
+		$this->load->model('reservation_model');
+		$this->load->model('position_model');
+	}
 	
 
 	public function home(){
@@ -40,25 +46,38 @@ class Pages extends CI_Controller{
 
 
 	//fetch data from a file and return it.
-	public function fetch(){
-		/*$myFile = "records.txt";
-		$fh = fopen($myFile, 'r');
-		$theData = fread($fh, filesize($myFile));
-		fclose($fh);
-		list($lat,$long) = explode(" ",$theData);*/
+	public function fetchClient(){
 
-
-    	$this->load->helper('maps_helper');
-    	$r = $this->session->userdata('reservation');
-    	$place = lookup($r['rue'] . ", " . $r['ville'] . " ,France");
-
-    	//$lat = 33.5380426;
-    	//$long = -7.6044972;
+    	$coord = $this->reservation_model->get_position_depart();
     	
-		$lat = $place['latitude'];
-		$long = $place['longitude'];
+    	if($coord != NULL){
+    		$lat = $coord->latitude;
+			$long = $coord->longitude;
+    	}else if($this->session->userdata('reservation')){
+    		$r = $this->session->userdata('reservation');
+    		$this->load->helper('maps_helper');
+			$coord = lookup($r['rue'] . ", " . $r['ville'] . " ,France"); 
+			$lat = $coord['latitude'];
+			$long = $coord['longitude'];
+    	}else{
+    		$lat = 48.85902;
+    		$long = 2.29332;
+    	}
+		
 
-		echo $long . " " . $lat;
+		echo $lat . " " . $long;
+	}
+
+	public function fetchChauffeurs(){
+		$c = $this->position_model->allPositions();
+		$str = " ";
+
+		foreach ($c->result_array() as $row)
+		{
+    		$str .= $row['latitude'] . " ";
+		}
+
+		echo json_encode($c->result_array());
 	}
 
 }

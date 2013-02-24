@@ -9,26 +9,41 @@ class Reservations extends CI_Controller{
 	
 	public function immediate(){
 
-		//recuperer champs formulaire
-		$data = array(
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('ville', 'Ville', 'required');
+		$this->form_validation->set_rules('rue', 'Rue', 'required');
+		$this->form_validation->set_rules('code_postale', 'Code Postale', 'required');
+      	$this->form_validation->set_rules('destination', 'Destination', 'required');
+
+      	if ( $this->form_validation->run() !== false ) {
+
+      		//recuperer champs formulaire
+			$data = array(
 				'ville' 		=> $this->input->post('ville'),
 				'rue' 			=> $this->input->post('rue'),
 				'cp' 			=> $this->input->post('code_postale'),
 				'destination' 	=> $this->input->post('destination'),
 				'passagers' 	=> $this->input->post('nombre_passagers'),
 				'bagages' 		=> $this->input->post('nombre_bagages')
-		);
+			);
 
-		//stocker les informations du formulaire dans la session
-		$this->session->set_userdata('reservation', $data);
+			//stocker les informations du formulaire dans la session
+			$this->session->set_userdata('reservation', $data);
 
 
-		//si utilisateur connecté, afficher homepage sinon page incription. 
-		if($this->session->userdata('user_id')){
-			redirect('pages/home');
-		}else{
-			redirect('users/create');
-		}
+			//si utilisateur connecté, afficher homepage sinon page incription. 
+			if($this->session->userdata('user_id')){
+				redirect('pages/home');
+			}else{
+				redirect('users/create');
+			}
+
+      	}else{
+      		$this->load->view('templates/header');
+      	$this->load->view('pages/home');
+      	$this->load->view('templates/footer');
+      	}
+		
 	}
 
 	public function process_immediate(){

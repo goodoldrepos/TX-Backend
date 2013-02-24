@@ -9,6 +9,7 @@
   <script src="<?php echo base_url(); ?>js/jquery.foundation.navigation.js"></script>
   <script src="<?php echo base_url(); ?>js/jquery.foundation.tabs.js"></script>
   <script src="<?php echo base_url(); ?>js/jquery.foundation.alerts.js"></script>
+  <script src="<?php echo base_url(); ?>js/maps.js"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <script src="http://www.paulund.co.uk/playground/demo/gmap-demo/js/gmaps.js"></script>
 
@@ -66,7 +67,7 @@
       <li class="divider hide-for-small"></li>
       <li><a href="<?php echo base_url(); ?>index.php/pages/home">Accueil</a></li>
       <li class="divider hide-for-small"></li>
-      <li><a href="<?php echo base_url(); ?>index.php/reservation/home">Réservations</a></li>
+      <li><a href="<?php echo base_url(); ?>index.php/reservations/home">Réservations</a></li>
       <li class="divider hide-for-small"></li>
       <?php if($this->session->userdata('user_id')){ ?>
 		<li>

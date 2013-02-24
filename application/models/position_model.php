@@ -12,5 +12,10 @@ class Position_model extends CI_Model {
 		$this->db->insert('positions', $data);
 	}
 
+	public function allPositions(){
+		$q = $this->db->get('positions');
+		return $q;
+	}
+
 
 }

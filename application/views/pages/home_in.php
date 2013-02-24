@@ -20,70 +20,8 @@ body{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
 }
 
+
 </style>
-<script type="text/javascript"> 
-
-  $(document).ready(function(){
-
-    var latitude = 33.5380426;
-    var longitude = -7.6044972;
-
-    var old_lat = 0;
-    var old_long = 0;
-    
-    var map = new GMaps({
-      el: '#basic_map',
-      lat: latitude,
-      lng: longitude
-    });
-
-    generateOutput();
-
-    window.setInterval(function() { generateOutput(); }, 3000);
-    
-    function generateOutput(){
-      $.get('fetch', function(data) {
-
-        var val = data.split(" ");
-        console.log(data);
-        latitude = val[0];
-        longitude = val[1];
-
-        //latitude += 0.0005;
-        //longitude += 0.0007;
-
-        /*map = new GMaps({
-          el: '#basic_map',
-          lat: latitude,
-          lng: longitude
-          });*/
-
-        map.removeMarkers(); 
-        map.addMarker({
-          lat: latitude,
-          lng: longitude,
-          title: 'Home',
-          click: function(e) { alert('Vous êtes ici'); }
-        }); 
-
-
-
-      });
-    }
-
-    
-  
-    /*map.addMarker({
-      lat: latitude,
-      lng: longitude,
-      title: 'Home',
-      click: function(e) { alert('Vous etes ici'); }
-    });*/
-
-  });
-
-  
-</script>
 
 <img src="<?php echo base_url() ?>images/halfcity.jpg">
 <br/><br/>

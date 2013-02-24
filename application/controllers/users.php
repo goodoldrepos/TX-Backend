@@ -18,12 +18,12 @@ class Users extends CI_Controller{
 
       	if ( $this->form_validation->run() !== false ) {
          // then validation passed. Get from db
-         	$res = $this
+         	$id = $this
                   ->user_model
                   ->create_user();
 
          
-         	$this->session->set_userdata('user_id', $res->id);
+         	$this->session->set_userdata('user_id', $id);
             redirect('pages/home');
        
       	}	

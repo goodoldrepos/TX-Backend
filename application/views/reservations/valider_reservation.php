@@ -21,69 +21,6 @@ body{
 }
 
 </style>
-<script type="text/javascript"> 
-
-  $(document).ready(function(){
-
-    var latitude = 0;
-    var longitude = 0;
-    
-    /*var map = new GMaps({
-      el: '#basic_map',
-      lat: latitude,
-      lng: longitude
-    });*/
-
-    var rendered = false;
-
-    generateOutput();
-
-    window.setInterval(function() { generateOutput(); }, 3000);
-    
-    function generateOutput(){
-      $.get('fetch', function(data) {
-
-        var val = data.split(" ");
-        console.log(data);
-        latitude = val[0];
-        longitude = val[1];
-
-        if(!rendered){
-          map = new GMaps({
-          el: '#basic_map',
-          lat: latitude,
-          lng: longitude
-          });
-          rendered = true;
-        }
-        
-
-        map.removeMarkers(); 
-        map.addMarker({
-          lat: latitude,
-          lng: longitude,
-          title: 'Home',
-          click: function(e) { alert('Vous êtes ici'); }
-        }); 
-
-
-
-      });
-    }
-
-    
-  
-    /*map.addMarker({
-      lat: latitude,
-      lng: longitude,
-      title: 'Home',
-      click: function(e) { alert('Vous etes ici'); }
-    });*/
-
-  });
-
-  
-</script>
 
 <img src="<?php echo base_url() ?>images/halfcity.jpg">
 <br/><br/>

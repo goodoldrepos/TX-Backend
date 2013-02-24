@@ -6,6 +6,7 @@
 
 <div class="row">
 	<div class="five columns">
+		<?php echo validation_errors(); ?>
 		<?php echo form_open('users/create') ?>
 			<label>Nom</label>
 			<input type="text" name="nom" />
