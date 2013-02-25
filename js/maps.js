@@ -1,5 +1,5 @@
-$(document).ready(function(){
-
+function getMap(){
+    
     var latitude = 48.85902;
     var longitude = 2.29332;
     
@@ -83,5 +83,7 @@ $(document).ready(function(){
       title: 'Home',
       click: function(e) { alert('Vous etes ici'); }
     });*/
+  
+}
 
-  });
+    

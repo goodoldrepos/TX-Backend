@@ -22,6 +22,10 @@ body{
 
 </style>
 
+<script type="text/javascript">
+  getMap(); //charger the map. 
+</script>
+
 <img src="<?php echo base_url() ?>images/halfcity.jpg">
 <br/><br/>
 <div class="row">
@@ -29,18 +33,6 @@ body{
     <div id="basic_map" class="map"></div>
   </div>
 </div>
-
-<br/><br/>
-
-
-<div class="row">
-  <div class="twelve columns">
-    <?php if($this->session->userdata('reservation')){
-      echo "Reservation en cours. <a href=" . site_url('reservations/annuler') . ">Annuler</a>";
-    } ?>
-  </div>
-</div>
-
 
 <br/><br/>
 
@@ -76,7 +68,8 @@ body{
     <a href="<?php echo site_url('reservations/process_immediate'); ?>">
       <input type="button" class="button" value="Confirmer" />
     </a>
-    <input type="button" class="button" value="Modifier" />
-    
+    <a href="<?php echo site_url('reservations/annuler'); ?>">
+    <input type="button" class="button" value="Annuler" />
+    </a>
   </div>
 </div>

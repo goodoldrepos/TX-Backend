@@ -18,12 +18,12 @@ function lookup($string){
    //print_r($response);
    $geometry = $response['results'][0]['geometry'];
  
-    $longitude = $geometry['location']['lat'];
-    $latitude = $geometry['location']['lng'];
+    $longitude = $geometry['location']['lng'];
+    $latitude = $geometry['location']['lat'];
  
     $array = array(
-        'latitude' => $geometry['location']['lng'],
-        'longitude' => $geometry['location']['lat'],
+        'latitude' => $geometry['location']['lat'],
+        'longitude' => $geometry['location']['lng'],
         'location_type' => $geometry['location_type'],
     );
  

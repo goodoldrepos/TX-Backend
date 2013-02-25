@@ -8,6 +8,7 @@
   <script src="<?php echo base_url(); ?>js/foundation.js"></script>
   <script src="<?php echo base_url(); ?>js/jquery.foundation.navigation.js"></script>
   <script src="<?php echo base_url(); ?>js/jquery.foundation.tabs.js"></script>
+  <script src="<?php echo base_url(); ?>js/jquery.foundation.reveal.js"></script>
   <script src="<?php echo base_url(); ?>js/jquery.foundation.alerts.js"></script>
   <script src="<?php echo base_url(); ?>js/maps.js"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
@@ -54,7 +55,7 @@
 
 <nav class="top-bar">
   <ul>
-    <li class="name"><h1><a href="#">Taxi.</a></h1></li>
+    <li class="name"><h1><a href="#">Beta.</a></h1></li>
     <li class="toggle-topbar"><a href="#"></a></li>
   </ul>
   <section>

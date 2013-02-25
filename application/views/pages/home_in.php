@@ -23,6 +23,10 @@ body{
 
 </style>
 
+<script type="text/javascript">
+  getMap(); //charger the map. 
+</script>
+
 <img src="<?php echo base_url() ?>images/halfcity.jpg">
 <br/><br/>
 <div class="row">
@@ -57,9 +61,9 @@ body{
             <label>Départ</label>
             <input type="text" name="ville" placeholder="Ville" />
             <input type="text" name="rue" placeholder="Rue" />
-            <input type="text" name="code_postale" placeholder="CP" />
+            <input type="text" name="code_postale" placeholder="Code Postale" />
             <label>Destination</label>
-            <input type="text" name="destination" placeholder="Rue" />
+            <input type="text" name="destination" placeholder="Adresse" />
             <label>Nombre de passagers</label>
             <select name="nombre_passagers" >
               <option>1</option>
