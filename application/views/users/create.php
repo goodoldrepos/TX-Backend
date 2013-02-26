@@ -10,9 +10,9 @@
 		<?php echo form_open('users/create') ?>
 			<label>Nom</label>
 			<input type="text" name="nom" />
-			<label>Prenom</label>
+			<label>Prénom</label>
 			<input type="text" name="prenom" />
-			<label>Telephone</label>
+			<label>Téléphone Mobile</label>
 			<input type="text" name="telephone" />
 			<label>Email</label>
 			<input type="text" name="email" />

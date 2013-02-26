@@ -19,7 +19,7 @@ class User_model extends CI_Model{
 
 	}
 
-	public function signIn($email, $password){
+	public function sign_in($email, $password){
 
 		$q = $this
             ->db
@@ -34,6 +34,25 @@ class User_model extends CI_Model{
       
       return false;
 		
+	}
+
+	public function get_user($id){
+		$q = $this->db->where('id', $id)->limit(1)->get('utilisateurs');
+		if ( $q->num_rows > 0 ) {
+         return $q->row();
+      }
+      
+      return false;
+	}
+
+	public function is_valid_password($id, $pwd){
+		$q = $this->db->where('id', $id)->limit(1)->get('utilisateurs');
+
+		if($q->num_rows > 0 && $q->row()->motdepasse == sha1($pwd)){
+			return true;	
+		}else{
+			return false;
+		}
 	}
 
 	public function isAdmin(){

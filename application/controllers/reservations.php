@@ -40,8 +40,8 @@ class Reservations extends CI_Controller{
 
       	}else{
       		$this->load->view('templates/header');
-      	$this->load->view('pages/home');
-      	$this->load->view('templates/footer');
+      		$this->load->view('pages/home');
+      		$this->load->view('templates/footer');
       	}
 		
 	}

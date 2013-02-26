@@ -16,7 +16,7 @@ class Sessions extends CI_Controller{
          // then validation passed. Get from db
          $res = $this
                   ->user_model
-                  ->signIn(
+                  ->sign_in(
                      $this->input->post('email'), 
                      $this->input->post('motdepasse')
                   );

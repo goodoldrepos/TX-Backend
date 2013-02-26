@@ -17,7 +17,7 @@ function getMap(){
     
 
     function fetch(){
-      $.get('fetchClient', function(data) {
+      $.get('/tx/index.php/pages/fetchClient', function(data) {
 
         var val = data.split(" ");
         console.log("Client: " + data);
@@ -42,7 +42,7 @@ function getMap(){
 
       });
 
-      $.get('fetchChauffeurs', function(data) {
+      $.get('/tx/index.php/pages/fetchChauffeurs', function(data) {
 
         //var val = data.split(" ");
         console.log("Chauffeurs: " + data);

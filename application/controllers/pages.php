@@ -60,6 +60,7 @@ class Pages extends CI_Controller {
 			$lat = $coord['latitude'];
 			$long = $coord['longitude'];
     	}else{
+    		//default values (Tour Eiffel)
     		$lat = 48.85902;
     		$long = 2.29332;
     	}
@@ -78,6 +79,12 @@ class Pages extends CI_Controller {
 		}
 
 		echo json_encode($c->result_array());
+	}
+
+	public function chaffeurs(){
+		$this->load->view('templates/header');
+		$this->load->view('pages/chaffeurs');
+		$this->load->view('templates/footer');
 	}
 
 }

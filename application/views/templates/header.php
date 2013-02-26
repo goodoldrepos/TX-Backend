@@ -2,21 +2,28 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
   <title></title>
-  <link href="<?php echo base_url(); ?>css/960.css" rel="stylesheet" type="text/css">
-  <link href="<?php echo base_url(); ?>css/foundation.css" rel="stylesheet" type="text/css">
-  <script src="<?php echo base_url(); ?>js/jquery.js"></script>
-  <script src="<?php echo base_url(); ?>js/foundation.js"></script>
-  <script src="<?php echo base_url(); ?>js/jquery.foundation.navigation.js"></script>
-  <script src="<?php echo base_url(); ?>js/jquery.foundation.tabs.js"></script>
-  <script src="<?php echo base_url(); ?>js/jquery.foundation.reveal.js"></script>
-  <script src="<?php echo base_url(); ?>js/jquery.foundation.alerts.js"></script>
-  <script src="<?php echo base_url(); ?>js/maps.js"></script>
+  <link href="<?php echo base_url('css/foundation.css'); ?>" rel="stylesheet" type="text/css">
+  <script src="<?php echo base_url('js/jquery.js'); ?>"></script>
+  <script src="<?php echo base_url('js/foundation.js'); ?>"></script>
+  <script src="<?php echo base_url('js/jquery.foundation.navigation.js'); ?>"></script>
+  <script src="<?php echo base_url('js/jquery.foundation.tabs.js'); ?>"></script>
+  <script src="<?php echo base_url('js/jquery.foundation.reveal.js'); ?>"></script>
+  <script src="<?php echo base_url('js/jquery.foundation.alerts.js'); ?>"></script>
+  <script src="<?php echo base_url('js/jquery.validate.js'); ?>"></script>
+  <script src="<?php echo base_url('js/maps.js'); ?>"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-  <script src="http://www.paulund.co.uk/playground/demo/gmap-demo/js/gmaps.js"></script>
-
+  <script src="<?php echo base_url('js/gmaps.js'); ?>"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(document).foundationNavigation();
+      $(document).foundationTabs();
+      $(document).foundationAlerts();
+    });
+  </script>
   <style type="text/css">
   body{
     #margin-top:20px;
+    padding-bottom: 250px;
   }
 
   .gray{
@@ -60,34 +67,44 @@
   </ul>
   <section>
     <ul class="left">
-      
-      
+        <!-- laisser vide -->
     </ul>
 
     <ul class="right">
       <li class="divider hide-for-small"></li>
-      <li><a href="<?php echo base_url(); ?>index.php/pages/home">Accueil</a></li>
+      <li><a href="<?php echo base_url('index.php/pages/home'); ?>">Accueil</a></li>
       <li class="divider hide-for-small"></li>
-      <li><a href="<?php echo base_url(); ?>index.php/reservations/home">Réservations</a></li>
+      <li>
+        <a href="<?php echo base_url('index.php/pages/services'); ?>">Services</a>
+      </li>
       <li class="divider hide-for-small"></li>
+      <li>
+        <a href="<?php echo base_url('index.php/pages/tarifs'); ?>">Tarifs</a>
+      </li>
+      <li class="divider hide-for-small"></li>
+      
       <?php if($this->session->userdata('user_id')){ ?>
-		<li>
-			<a href="<?php echo base_url(); ?>index.php/sessions/destroy">Se déconnecter</a>
-		</li>
+      <li>
+        <a href="<?php echo site_url('users/update') . '/' . $this->session->userdata('user_id'); ?>">Profil</a>
+      </li>
+      <li class="divider hide-for-small"></li>
+		  <li>
+			 <a href="<?php echo base_url('index.php/sessions/destroy'); ?>">Déconnexion</a>
+		  </li>
 			
 	  <?php }else{ ?>
+    <li>
+        <a href="<?php echo site_url('pages/chaffeurs') ?>">Espace Chaffeurs</a>
+    </li>
+    <li class="divider hide-for-small"></li>
 		<li>
-			<a href="<?php echo base_url(); ?>index.php/sessions/create">Se connecter</a>
+			<a href="<?php echo base_url('index.php/sessions/create'); ?>">Connexion</a>
 		</li>
 	  <?php } ?>
     </ul>
   </section>
 </nav>
 
-
-  <script type="text/javascript">
-    $(document).foundationNavigation();
-  </script>
 
 
   

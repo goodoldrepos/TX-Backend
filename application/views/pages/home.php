@@ -13,18 +13,17 @@
     		padding-left: 15px;
     		padding-right: 15px;
 
-    		#left:380px;
     		bottom:365px;
     		display: block;
   			margin-left: auto;
  			margin-right: auto;
     		background-color:white;
     		z-index: 10;
-    		border:black solid 1px;
+    		border:gray solid 1px;
 
     		-webkit-box-shadow: -1px 3px 5px rgba(50, 50, 50, 0.36);
-			-moz-box-shadow:    -1px 3px 5px rgba(50, 50, 50, 0.36);
-			box-shadow:         -1px 3px 5px rgba(50, 50, 50, 0.36);
+            -moz-box-shadow: -1px 3px 5px rgba(50, 50, 50, 0.36);
+            box-shadow: -1px 3px 5px rgba(50, 50, 50, 0.36);
   			
     	}
     	.banner{
@@ -84,20 +83,20 @@
         }
     </style>
 
-    <img class="banner" src="<?php echo base_url() ?>images/paris.jpg" />
+    <img class="banner" src="<?php echo base_url('images/paris.jpg'); ?>" />
 
     
     <div class="formulaire" >
     	<?php echo validation_errors(); ?>
-    	<?php echo form_open('reservations/immediate') ?>
+    	<?php echo form_open('reservations/immediate', array('id' => 'reservationForm')) ?>
 			<fieldset>
     		<legend>Demande immédiate</legend>
 			<label>Départ</label>
-					<input type="text" name="ville" placeholder="Ville" />
-					<input type="text" name="rue" placeholder="Rue" />
-					<input type="text" name="code_postale" placeholder="Code Postale" />
+					<input type="text" class="required" name="ville" placeholder="Ville" />
+					<input type="text" class="required" class="required" name="rue" placeholder="Rue" />
+					<input type="text" class="required" name="code_postale" placeholder="Code Postale" />
 			<label>Destination</label>
-			<input type="text" name="destination" placeholder="Adresse" />	
+			<input type="text" class="required" name="destination" placeholder="Adresse" />	
 			<label>Nombre de passagers</label>
 			<select name="nombre_passagers">
 				<option name="1" >1</option>
@@ -110,10 +109,16 @@
 				<option name="2" >2</option>
 			</select>
 			<br/><br/>
-			<input type="submit" class="small button right" value="Continuer" >
+			<input type="submit" class="small button success right" value="Continuer" >
 			<?php echo form_close() ?>
 			</fieldset>
     </div>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#reservationForm").validate();
+    });
+</script>
 
     <div class="row features">
         <div class="row reasons">

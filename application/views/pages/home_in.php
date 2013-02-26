@@ -9,17 +9,6 @@
   box-shadow:         6px 5px 7px rgba(50, 50, 50, 0.26);
 }
 
-body{
-  background: #eeeeee; /* Old browsers */
-  background: -moz-linear-gradient(top, #eeeeee 0%, #eeeeee 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #eeeeee 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #eeeeee 0%,#eeeeee 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #eeeeee 0%,#eeeeee 100%); /* IE10+ */
-  background: linear-gradient(to bottom, #eeeeee 0%,#eeeeee 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
-}
-
 
 </style>
 
@@ -151,8 +140,3 @@ body{
   </div>
   
 <?php } ?>
-
-<script type="text/javascript">
-$(document).foundationTabs();
-$(document).foundationAlerts();
-</script>
