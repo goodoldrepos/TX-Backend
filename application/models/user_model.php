@@ -55,6 +55,27 @@ class User_model extends CI_Model{
 		}
 	}
 
+	public function password_check($pwd){
+
+		$q = $this->db->where('id', $this->session->userdata('user_id'))->limit(1)->get('utilisateurs');
+
+		if($q->num_rows > 0 && $q->row()->motdepasse == sha1($pwd)){
+			return TRUE;	
+		}else{
+			return FALSE;
+		}
+	}
+
+	public function email_check(){
+		$q = $this->db->where('id', $id)->limit(1)->get('utilisateurs');
+
+		if($q->num_rows > 0 && $q->row()->motdepasse == sha1($pwd)){
+			return true;	
+		}else{
+			return false;
+		}
+	}
+
 	public function isAdmin(){
 		
 	}

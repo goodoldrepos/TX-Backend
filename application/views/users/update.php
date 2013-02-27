@@ -14,11 +14,11 @@
 </div>
 <?php } ?>
 
-<?php if($feedback){ ?>
+<?php if($this->session->userdata('feedback')){ ?>
 <div class="row">
 	<div class="">
 		<div class="alert-box success">
-  		<?php echo $feedback; ?>
+  		<?php echo $this->session->userdata('feedback'); ?>
   		<a href="" class="close">&times;</a>
 		</div>
 	</div>
@@ -46,13 +46,27 @@
 		<input type="text" class="required email" name="email" value="<?php echo $email; ?>" />
 		<label>Téléphone Mobile</label>
 		<input type="text" class="required digits" name="telephone" value="<?php echo $telephone; ?>" />
-		<label>Ancien Mot de passe</label>
+		<input type="submit" class="button success" value="Mettre à jour" />
+		<input type="reset" class="button secondary" value="Annuler" />
+		<?php echo form_close(); ?>
+	</div>
+</div>
+
+<br/><br/>
+
+
+<div class="row">
+	<div class="six columns">
+		<h3>Modifier mot de passe</h3>
+
+		<?php echo form_open('users/password/' . $id,array('id' => 'pwdForm')); ?>
+		<label>Ancien mot de passe</label>
 		<input type="password" class="required" name="ancien_motdepasse" />
 		<label>Nouveau mot de passe</label>
 		<input type="password" class="required" name="motdepasse" />
 		<label>Confirmer nouveau mot de passe</label>
 		<input type="password" class="required" name="confirmation_motdepasse" />
-		<input type="submit" class="button success" value="Mettre à jour" />
+		<input type="submit" class="button success" value="Envoyer" />
 		<input type="reset" class="button secondary" value="Annuler" />
 		<?php echo form_close(); ?>
 	</div>
@@ -61,6 +75,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
       	$("#editForm").validate();
+      	$("#pwdForm").validate();
 	});
 </script>
 		

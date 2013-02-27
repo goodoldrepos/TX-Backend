@@ -36,10 +36,10 @@
   <div class="twelve columns">
     <dl class="tabs">
       <dd class="active">
-        <a href="#simple1">Demande immédiate</a>
+        <a href="#simple1">Taxi immédiat</a>
       </dd>
       <dd>
-        <a href="#simple2">Demande à l'avance</a>
+        <a href="#simple2">Taxi à l'avance</a>
       </dd>
     </dl>
     <ul class="tabs-content">
