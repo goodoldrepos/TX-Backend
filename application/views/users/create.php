@@ -1,11 +1,14 @@
-<div class="row">
-	<div class="twelve columns">
+
+
+<div class="container">
+	<div class="row">
+	<div class="span12">
 		<h3>Inscription</h3>
 	</div>
 </div>
 
 <div class="row">
-	<div class="five columns">
+	<div class="span5">
 		<?php echo validation_errors(); ?>
 		<?php echo form_open('users/create', array('id' => 'inscriptionForm')) ?>
 			<label>Nom</label>
@@ -18,10 +21,11 @@
 			<input type="text" class="required email" name="email" />
 			<label>Mot de passe</label>
 			<input type="password" class="required" name="motdepasse" />
-			<input type="submit" class="button" value="Envoyer" >
+			<br/>
+			<input type="submit" class="btn btn-success" value="Envoyer" >
 		<?php echo form_close() ?>
 
-		<a href="<?php echo base_url() ?>/index.php/sessions/create">Déjà inscrit ?</a>
+		<a href="<?php echo site_url('sessions/create'); ?>">Déjà inscrit ?</a>
 	</div>
 </div>
 
@@ -30,3 +34,6 @@
       	$("#inscriptionForm").validate();
 	});
 </script>
+
+</div>
+
