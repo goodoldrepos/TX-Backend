@@ -94,11 +94,15 @@ class Users extends CI_Controller{
 
 	}
 
-	public function update($id){
+	public function update($id = NULL){
 
 		$this->session->set_userdata('feedback', NULL);
 
-		if($this->session->userdata('user_id') !== $id){
+		if(!$this->session->userdata('user_id') || $id == NULL){
+			redirect('sessions/create');
+		}
+
+		if( $this->session->userdata('user_id') !== $id){
 			redirect('users/update/' . $this->session->userdata('user_id'));
 		}
 
@@ -182,6 +186,10 @@ class Users extends CI_Controller{
 	public function destroy($id){
 		$this->user_model->delete($id);
 		redirect('pages/admin');
+	}
+
+	public function admin($id){
+		//$this->user_model->make_admin($id);
 	}
 	
 

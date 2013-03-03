@@ -88,15 +88,20 @@ class Pages extends CI_Controller {
 	}
 
 	public function admin(){
+		if($this->session->userdata('user_id') && is_admin($this->session->userdata('user_id'))){
+			$this->load->model('user_model');
+			$users= $this->user_model->get_all();
+			$reservations = $this->reservation_model->get_all();
+			//$chaffeurs = $this->chaffeur_model->get_all();
+			$data = array( 'users' => $users, 'reservations' => $reservations);
 
-		$this->load->model('user_model');
-		$users= $this->user_model->get_all();
-		$reservations = $this->reservation_model->get_all();
-		$data = array( 'users' => $users, 'reservations' => $reservations);
-
-		$this->load->view('templates/header');
-		$this->load->view('pages/admin', $data);
-		$this->load->view('templates/footer');
+			$this->load->view('templates/header');
+			$this->load->view('pages/admin', $data);
+			$this->load->view('templates/footer');
+		}else{
+			redirect('sessions/create');
+		}
+		
 	}
 
 }

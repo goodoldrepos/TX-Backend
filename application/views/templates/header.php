@@ -52,7 +52,7 @@
 
   <div class="navbar navbar-static-top navbar-inverse">
   <div class="navbar-inner">
-    <a class="brand" href="#">Beta.</a>
+    <a class="brand" href="#">&alpha;</a>
     <ul class="nav pull-right">
       <li><a href="<?php echo site_url('pages/home'); ?>">Accueil</a></li>
       <li>

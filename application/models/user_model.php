@@ -101,4 +101,12 @@ class User_model extends CI_Model{
 		$this->db->delete('utilisateurs', array('id' => $id));
 	}
 
+	public function make_admin($id){
+		$data = array(
+               'admin' => 1
+            );
+		$this->db->where('id', $id);
+		$this->db->update('utilisateurs', $data);
+	}
+
 }

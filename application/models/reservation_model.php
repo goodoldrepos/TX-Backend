@@ -40,7 +40,11 @@ class reservation_model extends CI_Model{
 
 	public function get_position_depart(){
 		$id = $this->session->userdata('user_id');
-		$reservation = $this->db->where('id_utilisateur', $id)->limit(1)->get('reservations'); 
+		$reservation = $this->db
+							->where('id_utilisateur', $id)
+							->where('statut', 'disponible')
+							->limit(1)
+							->get('reservations'); 
 
 		if($reservation->num_rows > 0){
 			$res = $reservation->row();
@@ -59,13 +63,29 @@ class reservation_model extends CI_Model{
 			
 	}
 
+	public function delete($id){
+		$data = array(
+               'statut' => 'done'
+            );
+		$this->db->where('id', $id);
+		$this->db->update('reservations', $data);
+	}
+
 	public function get_all(){
-		$this->db->select('*');
+		$this->db->select('reservations.id, 
+							reservations.destination, 
+							adresses_depart.ville, 
+							adresses_depart.rue, 
+							utilisateurs.nom,
+							utilisateurs.prenom,
+							reservations.statut
+							');
 		$this->db->from('reservations');
 		$this->db->join('utilisateurs', 'utilisateurs.id = reservations.id_utilisateur');
 		$this->db->join('adresses_depart', 'adresses_depart.id = reservations.id_depart');
 
-		$q = $this->db->get();
+	 	$q = $this->db->order_by('reservations.id','desc')->get();
+
 
 		if($q->num_rows > 0 ){
 			return $q->result();	

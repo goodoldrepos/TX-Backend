@@ -5,14 +5,15 @@
 			<br/><br/>
 			<div class="tabbable tabs-right">
   				<ul class="nav nav-tabs">
-  					<li class="active"><a href="#tab1" data-toggle="tab">Clients</a></li>
-    				<li><a href="#tab2" data-toggle="tab">Réservations</a></li>
-    				<li><a href="#tab3" data-toggle="tab">Chaffeurs</a></li>
+  					<li class="active"><a href="#tab1" data-toggle="tab"><i class="icon-user"></i> Clients</a></li>
+    				<li><a href="#tab2" data-toggle="tab"><i class="icon-road"></i> Réservations</a></li>
+    				<li><a href="#tab3" data-toggle="tab"><i class="icon-screenshot"></i> Chaffeurs</a></li>
 
   				</ul>
   				<div class="tab-content">
   					<div class="tab-pane active" id="tab1">
-      					
+      						<h3>Liste des clients</h3>
+
       						<table class="table table-striped">
 								<thead><th>Nom</th><th>Email</th><th>&nbsp;</th></thead>
 								<?php foreach($users as $user){ ?>
@@ -36,15 +37,16 @@
 								
     				</div>
     				<div class="tab-pane" id="tab2">
+    					<h3>Liste des réservations</h3>
       					<table class="table table-striped">
-								<thead><th>#</th><th>Depart</th><th>Destination</th><th>Client</th><th>Statut</th><th>&nbsp;</th></thead>
+								<thead><th>#</th><th>Départ</th><th>Destination</th><th>Client</th><th>Statut</th><th>&nbsp;</th></thead>
 								<?php foreach($reservations as $reservation){ ?>
 								<tr>
 									<td>
 										<?php echo $reservation->id; ?>
 									</td>
 									<td>
-										<?php echo $reservation->rue; ?>
+										<?php echo $reservation->rue . ', ' . $reservation->ville ; ?>
 									</td>
 									<td>
 										<?php echo $reservation->destination; ?>
@@ -63,34 +65,26 @@
 											 
 									</td>
 									<td>
-										<a href="<?php echo site_url(''); ?>">
-											<i class='icon-ok-circle'></i>
-										</a>
-										<a href="">
-											<i class='icon-remove-circle'></i>
-										</a>
+										<?php 
+											if($reservation->statut == 'disponible'){
+												echo "<a href=". site_url('reservations/destroy') . '/' . $reservation->id . "><i class='icon-ok-circle'></i></a>";
+											}else{
+												echo "&nbsp;";
+											}
+										?>
+										
+								
 									</td>
 								</tr>
 								<?php } ?>
 						</table>
     				</div>
     				<div class="tab-pane" id="tab3">
-      					<table class="table">
-								<thead><th>Nom</th><th>Chaffeur</th></thead>
-								<?php foreach($reservations as $reservation){ ?>
-								<tr>
-									<td>
-										<?php echo $reservation->id_utilisateur; ?>
-									</td>
-									<td>
-										<?php echo $reservation->id_depart; ?>
-									</td>
-								</tr>
-								<?php } ?>
-						</table>
+      					
     				</div>
   				</div>
 			</div>
 		</div>
 	</div>
 </div>
+

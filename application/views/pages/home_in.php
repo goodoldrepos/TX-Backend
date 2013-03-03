@@ -40,7 +40,7 @@ images/halfcity.jpg">
         <a href="#tab1" data-toggle="tab">Taxi Immédiat</a>
       </li>
       <li>
-        <a href="#tab2" data-toggle="tab">Taxi à l'avance</a>
+        <a href="#tab2" data-toggle="tab">Demande à l'avance</a>
       </li>
     </ul>
     <div class="tab-content">

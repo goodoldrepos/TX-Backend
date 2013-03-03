@@ -70,8 +70,9 @@ class Reservations extends CI_Controller{
 		
 	}
 
-	public function destroy(){
-		
+	public function destroy($id){
+		$this->reservation_model->delete($id);
+		redirect('pages/admin');
 	}
 
 	public function listAll(){
