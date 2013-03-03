@@ -1,9 +1,4 @@
-<script type="text/javascript">
-   $(window).load(function() {
-       $("#featured").orbit({ advanceSpeed:10000});
-   });
 
-</script>
 
 	<style type="text/css">
 

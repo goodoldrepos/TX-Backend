@@ -62,11 +62,25 @@
         <a href="<?php echo site_url('pages/tarifs'); ?>">Tarifs</a>
       </li>      
       <?php if($this->session->userdata('user_id')){ ?>
-      <li>
-        <a href="<?php echo site_url('users/update') . '/' . $this->session->userdata('user_id'); ?>">Profil</a>
-      </li>
-      <li>
-       <a href="<?php echo site_url('sessions/destroy'); ?>">Déconnexion</a>
+      <li id="fat-menu" class="dropdown">
+        <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-cog icon-white"></i><b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+          <?php if(is_admin($this->session->userdata('user_id'))){ ?>
+            <li>
+              <a href="<?php echo site_url('pages/admin'); ?>">Administration</a>
+              <li class="divider"></li>
+            </li>
+          <?php } ?>
+          <li>
+            <a href="<?php echo site_url('users/update') . '/' . $this->session->userdata('user_id'); ?>">Compte</a>
+          </li>
+          <li>
+            <a href="<?php echo site_url('sessions/destroy'); ?>">Déconnexion</a>
+          </li>
+
+        </ul>
       </li>
       
     <?php }else{ ?>

@@ -18,7 +18,7 @@
 		 	<input type="submit" class="btn btn-success" value="Envoyer" />
 		<?php echo form_close() ?>
 
-		<a href="<?php echo site_url('users/create'); ?>">Pas encore inscrit ?</a>
+		<a href="<?php echo site_url('users/create'); ?>">Nouvel utilisateur ?</a>
 	</div>
 </div>
 

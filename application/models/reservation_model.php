@@ -59,5 +59,20 @@ class reservation_model extends CI_Model{
 			
 	}
 
+	public function get_all(){
+		$this->db->select('*');
+		$this->db->from('reservations');
+		$this->db->join('utilisateurs', 'utilisateurs.id = reservations.id_utilisateur');
+		$this->db->join('adresses_depart', 'adresses_depart.id = reservations.id_depart');
+
+		$q = $this->db->get();
+
+		if($q->num_rows > 0 ){
+			return $q->result();	
+		}else{
+			return null;
+		}
+	}
+
 
 }

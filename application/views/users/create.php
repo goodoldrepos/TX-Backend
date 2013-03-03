@@ -25,7 +25,7 @@
 			<input type="submit" class="btn btn-success" value="Envoyer" >
 		<?php echo form_close() ?>
 
-		<a href="<?php echo site_url('sessions/create'); ?>">Déjà inscrit ?</a>
+		<a href="<?php echo site_url('sessions/create'); ?>">J'ai dispose déja d'un compte !</a>
 	</div>
 </div>
 

@@ -75,9 +75,23 @@ class Users extends CI_Controller{
 			$this->load->view('users/update', $data);
 			$this->load->view('templates/footer');
 		
-		
+	}
 
-		
+	public function show($id){
+			
+		$user = $this->user_model->get_user($id);
+
+		$data = array(
+				'nom' => $user->nom,
+				'prenom' => $user->prenom,
+				'email' => $user->email
+		);
+
+		$this->load->view('templates/header');
+		$this->load->view('users/show', $data);
+		$this->load->view('templates/footer');
+
+
 	}
 
 	public function update($id){
@@ -154,6 +168,23 @@ class Users extends CI_Controller{
 			return TRUE;
 		}
 	}
+
+	public function all(){
+		$users= $this->user_model->get_all();
+		$data = array( 'users' => $users);
+
+		$this->load->view('templates/header');
+		$this->load->view('users/list', $data);
+		$this->load->view('templates/footer');
+	}
+
+
+	public function destroy($id){
+		$this->user_model->delete($id);
+		redirect('pages/admin');
+	}
+	
+
 
 
 }

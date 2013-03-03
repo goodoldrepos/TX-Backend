@@ -76,8 +76,29 @@ class User_model extends CI_Model{
 		}
 	}
 
-	public function isAdmin(){
+	public function get_all(){
+		$q = $this->db->get('utilisateurs');
+		if($q->num_rows > 0 ){
+			return $q->result();	
+		}else{
+			return null;
+		}
+	}
+
+
+	public function is_admin($id){
+
+		$q = $this->db->where('id', $id)->limit(1)->get('utilisateurs');
+		if($q->num_rows > 0 && $q->row()->admin == 1){
+			return TRUE;	
+		}else{
+			return FALSE;
+		}
 		
+	}
+
+	public function delete($id){
+		$this->db->delete('utilisateurs', array('id' => $id));
 	}
 
 }

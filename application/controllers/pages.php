@@ -87,4 +87,16 @@ class Pages extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function admin(){
+
+		$this->load->model('user_model');
+		$users= $this->user_model->get_all();
+		$reservations = $this->reservation_model->get_all();
+		$data = array( 'users' => $users, 'reservations' => $reservations);
+
+		$this->load->view('templates/header');
+		$this->load->view('pages/admin', $data);
+		$this->load->view('templates/footer');
+	}
+
 }
