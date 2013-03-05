@@ -14,8 +14,7 @@
 
 <script type="text/javascript">getMap(); //charger the map. </script>
 
-<img src="<?php echo base_url() ?>
-images/halfcity.jpg">
+<img class="banner" src="<?php echo base_url('images/halfcity.jpg'); ?>">
 <br/>
 <br/>
 

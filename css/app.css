@@ -55,3 +55,8 @@ code {
 .error{
   color:red;
 }
+
+.banner{
+        position:relative;
+        width:100%;
+}

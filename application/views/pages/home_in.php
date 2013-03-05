@@ -9,11 +9,9 @@
   box-shadow:         6px 5px 7px rgba(50, 50, 50, 0.26);
 }
 
-
 </style>
 
-<img src="<?php echo base_url() ?>
-images/halfcity.jpg">
+<img class="banner" src="<?php echo base_url('images/halfcity.jpg '); ?>">
 <br/>
 <br/>
 

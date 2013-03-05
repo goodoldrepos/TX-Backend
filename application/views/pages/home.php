@@ -20,10 +20,7 @@
             box-shadow: -1px 3px 5px rgba(50, 50, 50, 0.36);
   			
     	}
-    	.banner{
-    		position:relative;
-    		width:100%;
-		}
+    	
 
 		.features{
 			position:relative;

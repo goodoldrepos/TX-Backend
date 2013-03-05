@@ -12,15 +12,30 @@ class Example extends REST_Controller
 
     function login_get(){
 
-        if(!$this->get('username') || !$this->get('pwd'))
+        if(!$this->get('email') || !$this->get('pwd'))
         {
             $this->response('Erreur Format', 400);
         }
 
-        if($this->get('username') == $this->get('pwd')){
+        if($this->user_model->sign_in($this->get('email'), $this->get('pwd'))){
             $this->response('Good', 200);
         }else{
-            $this->response('Wrong', 200);
+            $this->response('Bad', 200);
+        }
+       
+    }
+
+    function login_post(){
+
+        if(!$this->post('email') || !$this->post('pwd'))
+        {
+            $this->response('Erreur Format', 400);
+        }
+
+        if($this->user_model->sign_in($this->post('email'), $this->post('pwd'))){
+            $this->response('Good', 200);
+        }else{
+            $this->response('Bad', 200);
         }
        
     }
