@@ -85,8 +85,7 @@
     	<?php echo validation_errors(); ?>
     	<?php echo form_open('reservations/immediate', array('id' => 'reservationForm')) ?>
 			<label>Départ</label>
-				<input type="text" class="required input-block-level" name="ville" placeholder="Ville" />
-				<input type="text" class="required input-block-level" class="required" name="rue" placeholder="Rue" />
+				<input type="text" class="required input-block-level" class="required" name="depart" placeholder="Adresse" />
 				<input type="text" class="required input-block-level" name="code_postale" placeholder="Code Postale" />
 			<label>Destination</label>
 			<input type="text" class="required input-block-level" name="destination" placeholder="Adresse" />	

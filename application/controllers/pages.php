@@ -56,7 +56,7 @@ class Pages extends CI_Controller {
     	}else if($this->session->userdata('reservation')){
     		$r = $this->session->userdata('reservation');
     		$this->load->helper('maps_helper');
-			$coord = lookup($r['rue'] . ", " . $r['ville'] . " ,France"); 
+			$coord = lookup($r['depart'] . " ,France"); 
 			$lat = $coord['latitude'];
 			$long = $coord['longitude'];
     	}else{

@@ -32,15 +32,11 @@
   <div class="row">
     <div class="span6">
       <table class="table">
-        <tr>
-          <td>Ville</td>
-          <td>
-            <?php echo $ville; ?></td>
-        </tr>
+        
         <tr>
           <td>Rue</td>
           <td>
-            <?php echo $rue; ?></td>
+            <?php echo $depart; ?></td>
         </tr>
         <tr>
           <td>Code Postale</td>

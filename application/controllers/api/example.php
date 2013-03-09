@@ -8,73 +8,102 @@ class Example extends REST_Controller
     public function __construct(){
         parent::__construct();
         $this->load->model('user_model');
+        $this->load->model('position_model');
+        $this->load->model('reservation_model');
     }
 
-    function login_get(){
-
-        if(!$this->get('email') || !$this->get('pwd'))
-        {
-            $this->response('Erreur Format', 400);
-        }
-
-        if($this->user_model->sign_in($this->get('email'), $this->get('pwd'))){
-            $this->response('Good', 200);
-        }else{
-            $this->response('Bad', 200);
-        }
-       
-    }
-
+    //verifies if the login/password are correct
     function login_post(){
 
         if(!$this->post('email') || !$this->post('pwd'))
         {
-            $this->response('Erreur Format', 400);
+            $this->response(array('status' => 'Erreur Format'), 200);
         }
 
         if($this->user_model->sign_in($this->post('email'), $this->post('pwd'))){
-            $this->response('Good', 200);
+            $r = $this->user_model->sign_in( $this->post('email'), $this->post('pwd') );
+            //send response
+            $this->response(array('status' => 'done', 'user_id' => $r->id ), 200);
         }else{
-            $this->response('Bad', 200);
+            //send response
+            $this->response(array('status' => 'Error Auth'), 200);
         }
        
     }
 
-	function user_get()
-    {
-        if(!$this->get('id'))
-        {
-        	$this->response(NULL, 400);
-        }
+    //fetch les positions des taxis
+    function chaffeurs_get(){
 
-        // $user = $this->some_model->getSomething( $this->get('id') );
-    	$users = array(
-			1 => array('id' => 1, 'name' => 'Some Guy', 'email' => 'example1@example.com', 'fact' => 'Loves swimming'),
-			2 => array('id' => 2, 'name' => 'Person Face', 'email' => 'example2@example.com', 'fact' => 'Has a huge face'),
-			3 => array('id' => 3, 'name' => 'Scotty', 'email' => 'example3@example.com', 'fact' => 'Is a Scott!', array('hobbies' => array('fartings', 'bikes'))),
-		);
-		
-    	$user = @$users[$this->get('id')];
-    	
-        if($user)
-        {
-            $this->response($user, 200); // 200 being the HTTP response code
-        }
+        $c = $this->position_model->allPositions();
 
-        else
-        {
-            $this->response(array('error' => 'User could not be found'), 404);
-        }
-    }
-    
-    function user_post()
-    {
-        //$this->some_model->updateUser( $this->get('id') );
-        $message = array('id' => $this->get('id'), 'name' => $this->post('name'), 'email' => $this->post('email'), 'message' => 'ADDED!');
+        $this->response(array('action' => 'getChaffeurs', 'chaffeurs' => $c->result_array(), 'status' => 'done' ) ,200);
         
-        $this->response($message, 200); // 200 being the HTTP response code
     }
     
+    //create a new user and return it's id. (for now ... a token later)
+    function user_post()
+    {   
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('nom', 'Nom', 'required');
+        $this->form_validation->set_rules('prenom', 'Prenom', 'required');
+        $this->form_validation->set_rules('telephone', 'Telephone', 'required');
+        $this->form_validation->set_rules('email', 'Adresse Email', 'valid_email|required|is_unique[utilisateurs.email]');
+        $this->form_validation->set_rules('motdepasse', 'Mot de passe', 'required|min_length[4]');
+
+        if ( $this->form_validation->run() !== false ) {
+            $message = $this->user_model->create_user( $this->post('nom'),
+                                                    $this->post('prenom'), 
+                                                    $this->post('telephone'),
+                                                    $this->post('email'),
+                                                    $this->post('motdepasse')
+                                                    );
+        
+            $this->response(array('status' => "done"), 200); // 200 being the HTTP response code
+        }else{
+            $this->response(array('status' => "error"), 200);
+        }
+
+        
+    }
+
+    //get any current reservation
+    function reservation_get(){
+
+        $r = $this->reservation_model->get_current_reservation($this->get('id'));
+
+        if($r){
+            $this->response(array('action' => 'getReservation', 'reservation' => $r, 'status' => 'done'), 200);
+        }else{
+            $this->response(array('action' => 'getReservation', 'status' => 'no reservation'), 200);
+
+        }
+
+    }
+
+    function cancelReservation_get(){
+        $this->reservation_model->delete($this->get('id'));
+        $this->response(array('action' => 'cancelReservation', 'status' => 'done'), 200);
+    }
+
+    //create reservation
+    function reservation_post()
+    {  
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('depart', 'Depart', 'required');
+        $this->form_validation->set_rules('destination', 'Destination', 'required');
+
+        if ( $this->form_validation->run() !== false ) {
+            $r = $this->reservation_model->create_reservation($this->post('depart'), 
+                                                            $this->post('destination'), 
+                                                            $this->post('id'));
+            $depart = array( 'latitude' => $r['latitude'], 'longitude' => $r['longitude'] );                                              
+            $this->response(array('action' => 'createReservation', 'status' => 'done', 'depart' => $depart), 200);
+        }else{
+            $this->response(array('action' => 'createReservation', 'status' => "error"), 200);
+        }
+        
+    }
+
     function user_delete()
     {
     	//$this->some_model->deletesomething( $this->get('id') );
@@ -95,7 +124,7 @@ class Example extends REST_Controller
 
         else
         {
-            $this->response(array('error' => 'Couldn\'t find any users!'), 404);
+            $this->response(array('status' => 'Couldn\'t find any users!'), 404);
         }
     }
 

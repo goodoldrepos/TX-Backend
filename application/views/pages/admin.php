@@ -5,22 +5,22 @@
 			<br/><br/>
 			<div class="tabbable tabs-right">
   				<ul class="nav nav-tabs">
-  					<li class="active"><a href="#tab1" data-toggle="tab"><i class="icon-user"></i> Clients</a></li>
-    				<li><a href="#tab2" data-toggle="tab"><i class="icon-road"></i> Réservations</a></li>
+  					<li class="active" ><a href="#tab2" data-toggle="tab"><i class="icon-road"></i> Réservations</a></li>
+  					<li ><a href="#tab1" data-toggle="tab"><i class="icon-user"></i> Clients</a></li>
     				<li><a href="#tab3" data-toggle="tab"><i class="icon-screenshot"></i> Chaffeurs</a></li>
 
   				</ul>
   				<div class="tab-content">
-  					<div class="tab-pane active" id="tab1">
+  					<div class="tab-pane " id="tab1">
       						<h3>Liste des clients</h3>
 
-      						<table class="table table-striped">
-								<thead><th>Nom</th><th>Email</th><th>&nbsp;</th></thead>
+      						<table class="table table-bordered table-striped">
+								<thead><th>Prénom Nom</th><th>Adresse email</th><th>&nbsp;</th></thead>
 								<?php foreach($users as $user){ ?>
 								<tr>
 									<td>
 										<a href="<?php echo site_url('users/show') . '/' . $user->id; ?>" >
-											<?php echo $user->nom . ' ' . $user->prenom; ?>
+											<?php echo $user->prenom . ' ' . $user->nom; ?>
 										</a>
 									</td>
 									<td>
@@ -36,38 +36,40 @@
 							</table>
 								
     				</div>
-    				<div class="tab-pane" id="tab2">
+    				<div class="tab-pane active" id="tab2">
     					<h3>Liste des réservations</h3>
-      					<table class="table table-striped">
-								<thead><th>#</th><th>Départ</th><th>Destination</th><th>Client</th><th>Statut</th><th>&nbsp;</th></thead>
-								<?php foreach($reservations as $reservation){ ?>
+      					<table class="table table-bordered table-striped">
+								<thead><th>#</th><th>Client</th><th>Adresse de départ</th><th>Adresse de destination</th><th>Statut</th><th>&nbsp;</th></thead>
+
+								<?php if(count($reservations) != 0) foreach($reservations as $reservation){ ?>
 								<tr>
 									<td>
 										<?php echo $reservation->id; ?>
 									</td>
 									<td>
-										<?php echo $reservation->rue . ', ' . $reservation->ville ; ?>
+										<?php echo $reservation->prenom . ' ' . $reservation->nom; ?>
+									</td>
+									<td>
+										<?php echo $reservation->adresse; ?>
 									</td>
 									<td>
 										<?php echo $reservation->destination; ?>
 									</td>
-									<td>
-										<?php echo $reservation->nom . ' ' . $reservation->prenom; ?>
-									</td>
+									
 									<td>
 										<?php 
-											if($reservation->statut != 'disponible'){
+											if($reservation->status != 'pending'){
 												echo "<i class='icon-ok'></i>";
 											}else{
-												echo "<i class='icon-map-marker'></i>";
+												echo "en attente";
 											}
 										?>
 											 
 									</td>
 									<td>
 										<?php 
-											if($reservation->statut == 'disponible'){
-												echo "<a href=". site_url('reservations/destroy') . '/' . $reservation->id . "><i class='icon-ok-circle'></i></a>";
+											if($reservation->status == 'pending'){
+												echo "<a href=". site_url('reservations/destroy') . '/' . $reservation->id . ">Annuler</a>";
 											}else{
 												echo "&nbsp;";
 											}

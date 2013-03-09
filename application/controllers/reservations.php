@@ -10,8 +10,7 @@ class Reservations extends CI_Controller{
 	public function immediate(){
 
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('ville', 'Ville', 'required');
-		$this->form_validation->set_rules('rue', 'Rue', 'required');
+		$this->form_validation->set_rules('depart', 'Départ', 'required');
 		$this->form_validation->set_rules('code_postale', 'Code Postale', 'required');
       	$this->form_validation->set_rules('destination', 'Destination', 'required');
 
@@ -20,7 +19,7 @@ class Reservations extends CI_Controller{
       		//recuperer champs formulaire
 			$data = array(
 				'ville' 		=> $this->input->post('ville'),
-				'rue' 			=> $this->input->post('rue'),
+				'depart' 			=> $this->input->post('depart'),
 				'cp' 			=> $this->input->post('code_postale'),
 				'destination' 	=> $this->input->post('destination'),
 				'passagers' 	=> $this->input->post('nombre_passagers'),
@@ -47,8 +46,11 @@ class Reservations extends CI_Controller{
 	}
 
 	public function process_immediate(){
+
+		$r = $this->session->userdata('reservation');
+
 		//creer une reservation dans la table
-		$this->reservation_model->create_reservation();
+		$this->reservation_model->create_reservation($r['depart'], $r['destination'], $this->session->userdata('user_id'));
 		
 		//supprimer la reservation de la session
 		$this->session->unset_userdata('reservation');

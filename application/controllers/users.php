@@ -20,7 +20,12 @@ class Users extends CI_Controller{
          // then validation passed. Get from db
          	$id = $this
                   ->user_model
-                  ->create_user();
+                  ->create_user($this->input->post('nom'),
+                  				$this->input->post('prenom'),
+                  				$this->input->post('telephone'),
+                  				$this->input->post('email'),
+                  				$this->input->post('motdepasse')
+                  );
 
          	$this->session->set_userdata('user_id', $id);
             redirect('pages/home');
@@ -102,7 +107,7 @@ class Users extends CI_Controller{
 			redirect('sessions/create');
 		}
 
-		if( $this->session->userdata('user_id') !== $id){
+		if( $this->session->userdata('user_id') != $id){
 			redirect('users/update/' . $this->session->userdata('user_id'));
 		}
 
@@ -138,7 +143,7 @@ class Users extends CI_Controller{
 					'id' => $id,
 				);
 			}
-			
+		
 			$this->load->view('templates/header');
 			$this->load->view('users/update', $data);
 			$this->load->view('templates/footer');

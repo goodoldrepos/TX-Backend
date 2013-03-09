@@ -1,22 +1,20 @@
 <?php  
 
 class User_model extends CI_Model{
-	
 
-	public function create_user(){
-		
+	public function create_user($nom, $prenom, $telephone, $email, $motdepasse){
+
 		$data = array(
-				'email' 		=>	  $this->input->post('email'), 
-                'motdepasse' 	=>    sha1($this->input->post('motdepasse')),
-                'nom' 			=>    $this->input->post('nom'),
-                'prenom' 		=>    $this->input->post('prenom'),
-                'telephone' 	=>    $this->input->post('telephone'),
+				'email' 		=>	  $email, 
+                'motdepasse' 	=>    sha1($motdepasse),
+                'nom' 			=>    $nom,
+                'prenom' 		=>    $prenom,
+                'telephone' 	=>    $telephone
 		);
 
 		$this->db->insert('utilisateurs', $data);
 
 		return $this->db->insert_id();
-
 	}
 
 	public function sign_in($email, $password){

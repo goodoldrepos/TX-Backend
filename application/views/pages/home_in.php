@@ -47,13 +47,11 @@
           <div class="span5">
             <?php echo form_open('reservations/immediate') ?>
             <label>Départ</label>
-            <input type="text" class="required input-block-level"name="rue" placeholder="Adresse" />
+            <input type="text" class="required input-block-level"name="depart" placeholder="Adresse de départ" />
             <br/>
-            <input type="text" class="required input-block-level" name="ville" placeholder="Ville" />
-            <br/>
-            <input type="text" class="required input-block-level" name="code_postale" placeholder="Code Postale" />
+            <input type="text" class="required input-block-level" name="code_postale" placeholder="Code postale" />
             <label>Destination</label>
-            <input type="text" class="required input-block-level" name="destination" placeholder="Adresse" />
+            <input type="text" class="required input-block-level" name="destination" placeholder="Adresse de destination" />
             <label>Nombre de passagers</label>
             <select name="nombre_passagers" class="input-block-level" >
               <option>1</option>
