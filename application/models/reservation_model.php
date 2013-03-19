@@ -117,5 +117,28 @@ class reservation_model extends CI_Model{
 		}
 	}
 
+	//un chaffeur accepte une reservation, faut lui confirmer. 
+	public function validate_reservation($id_reservation, $id_chauffeur){
+		$q = $this->db->where('id', $id_reservation)->get('reservations'); 
+
+		if($q->num_rows > 0 ){
+			$r = $q->row(); 
+			if( $r->status == 'pending'){
+				$data = array(
+               		'status' => 'accepted', 
+               		'id_chauffeur' => $id_chauffeur
+            	);
+				$this->db->where('id', $id_reservation);
+				$this->db->update('reservations', $data);
+				return true;
+
+			}else{
+				return 'no pending'; 
+			}
+		}else{
+			return 'no reservation for ' . $id_reservation;
+		}
+	}
+
 
 }

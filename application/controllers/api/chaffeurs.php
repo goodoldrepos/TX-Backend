@@ -50,6 +50,19 @@ class Chaffeurs extends REST_Controller
 
     }
 
+    function acceptReservation_post(){
+
+        if($this->reservation_model->validate_reservation($this->post('idReservation'), $this->post('idChauffeur')) == 'accepted'){
+
+            $this->response(array('status' => 'accepted','id' => $this->post('idReservation'), 'action' => 'confirmationReservation'), 200);
+
+        }else{
+            $r = $this->reservation_model->validate_reservation($this->post('idReservation'), $this->post('idChauffeur'));
+            $this->response(array('status' => 'notAccepted','id' => $r, 'action' => 'confirmationReservation'), 200);
+        }
+
+    }
+
     function users_get()
     {
         $users = $this->user_model->get_all();
@@ -66,7 +79,7 @@ class Chaffeurs extends REST_Controller
     }
 
     //fetch les positions des taxis
-    function chaffeurs_get(){
+    function chauffeurs_get(){
         $c = $this->position_model->allPositions();
         $this->response(array('action' => 'getChaffeurs', 'chaffeurs' => $c->result_array(), 'status' => 'done' ) ,200);
         
