@@ -21,9 +21,11 @@ class Example extends REST_Controller
         }
 
         if($this->user_model->sign_in($this->post('email'), $this->post('pwd'))){
+
             $r = $this->user_model->sign_in( $this->post('email'), $this->post('pwd') );
             //send response
-            $this->response(array('status' => 'done', 'user_id' => $r->id ), 200);
+            $this->response(array('status' => 'done', 'user_id' => $r->id, 'profil' => $r), 200);
+
         }else{
             //send response
             $this->response(array('status' => 'Error Auth'), 200);

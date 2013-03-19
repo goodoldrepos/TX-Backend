@@ -52,32 +52,35 @@
 
   <div class="navbar navbar-static-top navbar-inverse">
   <div class="navbar-inner">
-    <a class="brand" href="#">&alpha;</a>
+    <a class="brand" href="#">t a x i</a>
     <ul class="nav pull-right">
-      <li><a href="<?php echo site_url('pages/home'); ?>">Accueil</a></li>
-      <li>
-        <a href="<?php echo site_url('pages/services'); ?>">Services</a>
+      <li >
+        <a href="<?php echo site_url('pages/home'); ?>"><i class="icon-home icon-white"></i> Accueil</a>
       </li>
-      <li>
-        <a href="<?php echo site_url('pages/tarifs'); ?>">Tarifs</a>
+      <li >
+        <a href="<?php echo site_url('pages/services'); ?>"><i class="icon-th-large icon-white"></i>  Services</a>
+      </li>
+      <li >
+        <a href="<?php echo site_url('pages/tarifs'); ?>"> <i class="icon-tags icon-white"></i> Tarifs</a>
       </li>      
       <?php if($this->session->userdata('user_id')){ ?>
       <li id="fat-menu" class="dropdown">
         <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-cog icon-white"></i><b class="caret"></b>
+          <i class="icon-plus-sign icon-white"></i> <?php echo $this->session->userdata('username'); ?> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+          
+          <li>
+            <a href="<?php echo site_url('users/update') . '/' . $this->session->userdata('user_id'); ?>"><i class="icon-user"></i> Gestion du compte</a>
+          </li>
           <?php if(is_admin($this->session->userdata('user_id'))){ ?>
             <li>
-              <a href="<?php echo site_url('pages/admin'); ?>">Administration</a>
+              <a href="<?php echo site_url('pages/admin'); ?>"><i class="icon-cog"></i> Espace Administration</a>
               <li class="divider"></li>
             </li>
           <?php } ?>
           <li>
-            <a href="<?php echo site_url('users/update') . '/' . $this->session->userdata('user_id'); ?>">Compte</a>
-          </li>
-          <li>
-            <a href="<?php echo site_url('sessions/destroy'); ?>">Déconnexion</a>
+            <a href="<?php echo site_url('sessions/destroy'); ?>"><i class="icon-off"></i> Se déconnecter</a>
           </li>
 
         </ul>
@@ -85,10 +88,10 @@
       
     <?php }else{ ?>
     <li>
-        <a href="<?php echo site_url('pages/chaffeurs') ?>">Espace Chaffeurs</a>
+        <a href="<?php echo site_url('pages/chaffeurs') ?>"><i class="icon-plane icon-white"></i> Espace Chaffeurs</a>
     </li>
     <li  >
-      <a href="<?php echo site_url('sessions/create'); ?>">Connexion</a>
+      <a href="<?php echo site_url('sessions/create'); ?>"><i class="icon-circle-arrow-right icon-white"></i> Connexion</a>
     </li>
     <?php } ?>
     </ul>

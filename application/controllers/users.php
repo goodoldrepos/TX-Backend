@@ -28,6 +28,7 @@ class Users extends CI_Controller{
                   );
 
          	$this->session->set_userdata('user_id', $id);
+         	$this->session->set_userdata('username', $this->input->post('nom') . " " . $this->input->post('prenom'));
             redirect('pages/home');
       	}	
 

@@ -18,6 +18,23 @@ class Chaffeur_model extends CI_Model {
 
 	}
 
+	public function sign_in($email, $password){
+
+		$q = $this
+            ->db
+            ->select('date_created, nom, prenom, telephone, email, id')
+            ->where('email', $email)
+            ->where('motdepasse', $password)
+            ->limit(1)
+            ->get('chaffeurs');
+
+      if ( $q->num_rows > 0 ) {
+         return $q->row();
+      }
+      
+      return false;
+		
+	}
 
 
 }

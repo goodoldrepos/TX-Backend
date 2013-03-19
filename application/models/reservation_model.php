@@ -11,6 +11,10 @@ class reservation_model extends CI_Model{
 		$this->load->helper('maps_helper');
 		$coord = lookup($depart  . " ,France"); 
 
+		if($coord['latitude'] == NULL){
+			$coord['latitude'] = $coord['longitude'] = 0;
+		}
+
 		$a_depart = array(
 				'adresse' 		=> $depart,
 				'code_postale' 	=> $depart,

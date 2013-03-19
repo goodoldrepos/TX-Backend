@@ -4,12 +4,15 @@ class User_model extends CI_Model{
 
 	public function create_user($nom, $prenom, $telephone, $email, $motdepasse){
 
+		$device_token = sha1($email . sha1($password));
+
 		$data = array(
 				'email' 		=>	  $email, 
                 'motdepasse' 	=>    sha1($motdepasse),
                 'nom' 			=>    $nom,
                 'prenom' 		=>    $prenom,
-                'telephone' 	=>    $telephone
+                'telephone' 	=>    $telephone,
+                'device_token'	=> 	  $device_token	
 		);
 
 		$this->db->insert('utilisateurs', $data);
@@ -21,6 +24,7 @@ class User_model extends CI_Model{
 
 		$q = $this
             ->db
+            ->select('date_created, device_token, nom, prenom, telephone, email, id')
             ->where('email', $email)
             ->where('motdepasse', sha1($password))
             ->limit(1)

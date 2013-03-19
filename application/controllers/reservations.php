@@ -55,6 +55,18 @@ class Reservations extends CI_Controller{
 		//supprimer la reservation de la session
 		$this->session->unset_userdata('reservation');
 
+
+		$this->load->library('email');
+
+		$this->email->from('taxi@braksa.com', 'Taxi Parisien');
+		$this->email->to('qmathematical@gmail.com'); 
+		$this->email->cc('zakaria@braksa.com'); 
+
+		$this->email->subject('Email Test');
+		$this->email->message('Testing the email class.');	
+
+		$this->email->send();
+
 		//redireger vers page d'accueil
 		redirect('pages/home');
 	}
