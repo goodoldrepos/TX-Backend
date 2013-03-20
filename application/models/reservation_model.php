@@ -92,6 +92,7 @@ class reservation_model extends CI_Model{
 		$data = array( 'status' => 'done' );
 		$this->db->where('id', $id);
 		$this->db->update('reservations', $data);
+		return true;
 	}
 
 	//get all reservations (active + archive)

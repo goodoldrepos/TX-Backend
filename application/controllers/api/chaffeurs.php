@@ -61,6 +61,19 @@ class Chaffeurs extends REST_Controller
             $this->response(array('status' => 'notAccepted','id' => $r, 'action' => 'confirmationReservation'), 200);
         }
 
+        $this->response(array('status' => 'notAccepted', 'action' => 'confirmationReservation'), 200);
+
+    }
+
+    function cancelReservation_post(){
+        if($this->reservation_model->delete($this->post('idReservation')))
+        {
+            $this->response(array('status' => 'done','id' => $this->post('idReservation'), 'action' => 'cancelReservation'), 200);
+        }
+        else
+        {
+            $this->response(array('status' => 'error','action' => 'cancelReservation'), 200);
+        }
     }
 
     function users_get()

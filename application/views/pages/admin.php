@@ -58,11 +58,7 @@
 									
 									<td>
 										<?php 
-											if($reservation->status != 'pending'){
-												echo "<i class='icon-ok'></i>";
-											}else{
-												echo "en attente";
-											}
+											echo $reservation->status . ".";
 										?>
 											 
 									</td>
