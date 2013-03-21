@@ -7,7 +7,7 @@
   				<ul class="nav nav-tabs">
   					<li class="active" ><a href="#tab2" data-toggle="tab"><i class="icon-road"></i> Réservations</a></li>
   					<li ><a href="#tab1" data-toggle="tab"><i class="icon-user"></i> Clients</a></li>
-    				<li><a href="#tab3" data-toggle="tab"><i class="icon-screenshot"></i> Chaffeurs</a></li>
+    				<li><a href="#tab3" data-toggle="tab"><i class="icon-screenshot"></i> Chauffeurs</a></li>
 
   				</ul>
   				<div class="tab-content">

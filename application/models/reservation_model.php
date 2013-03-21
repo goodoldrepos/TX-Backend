@@ -42,7 +42,7 @@ class reservation_model extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('reservations');
 		$this->db->where('id_utilisateur', $id);
-		$this->db->where('status !=', 'done');
+		$this->db->where('status', 'pending');
 		$this->db->join('adresses_depart', 'adresses_depart.id = reservations.id_depart');
 
 		$q = $this->db->get();
@@ -118,7 +118,7 @@ class reservation_model extends CI_Model{
 		}
 	}
 
-	//un chaffeur accepte une reservation, faut lui confirmer. 
+	//un chauffeur accepte une reservation, faut lui confirmer. 
 	public function validate_reservation($id_reservation, $id_chauffeur){
 		$q = $this->db->where('id', $id_reservation)->get('reservations'); 
 

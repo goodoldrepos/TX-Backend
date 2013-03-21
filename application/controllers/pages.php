@@ -81,9 +81,9 @@ class Pages extends CI_Controller {
 		echo json_encode($c->result_array());
 	}
 
-	public function chaffeurs(){
+	public function chauffeurs(){
 		$this->load->view('templates/header');
-		$this->load->view('pages/chaffeurs');
+		$this->load->view('pages/chauffeurs');
 		$this->load->view('templates/footer');
 	}
 
@@ -92,7 +92,7 @@ class Pages extends CI_Controller {
 			$this->load->model('user_model');
 			$users= $this->user_model->get_all();
 			$reservations = $this->reservation_model->get_all();
-			//$chaffeurs = $this->chaffeur_model->get_all();
+			//$chauffeurs = $this->chauffeur_model->get_all();
 			$data = array( 'users' => $users, 'reservations' => $reservations);
 
 			$this->load->view('templates/header');

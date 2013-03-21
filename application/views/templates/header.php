@@ -88,7 +88,7 @@
       
     <?php }else{ ?>
     <li>
-        <a href="<?php echo site_url('pages/chaffeurs') ?>"><i class="icon-plane icon-white"></i> Espace Chaffeurs</a>
+        <a href="<?php echo site_url('pages/chauffeurs') ?>"><i class="icon-plane icon-white"></i> Espace Chauffeurs</a>
     </li>
     <li  >
       <a href="<?php echo site_url('sessions/create'); ?>"><i class="icon-circle-arrow-right icon-white"></i> Connexion</a>

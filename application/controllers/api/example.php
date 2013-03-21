@@ -34,12 +34,9 @@ class Example extends REST_Controller
     }
 
     //fetch les positions des taxis
-    function chaffeurs_get(){
-
+    function chauffeurs_get(){
         $c = $this->position_model->allPositions();
-
-        $this->response(array('action' => 'getChaffeurs', 'chaffeurs' => $c->result_array(), 'status' => 'done' ) ,200);
-        
+        $this->response(array('action' => 'getChauffeurs', 'chauffeurs' => $c->result_array(), 'status' => 'done' ) ,200);  
     }
     
     //create a new user and return it's id. (for now ... a token later)
@@ -52,7 +49,7 @@ class Example extends REST_Controller
         $this->form_validation->set_rules('email', 'Adresse Email', 'valid_email|required|is_unique[utilisateurs.email]');
         $this->form_validation->set_rules('motdepasse', 'Mot de passe', 'required|min_length[4]');
 
-        if ( $this->form_validation->run() !== false ) {
+        if ($this->form_validation->run()) {
             $message = $this->user_model->create_user( $this->post('nom'),
                                                     $this->post('prenom'), 
                                                     $this->post('telephone'),

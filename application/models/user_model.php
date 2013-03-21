@@ -4,7 +4,7 @@ class User_model extends CI_Model{
 
 	public function create_user($nom, $prenom, $telephone, $email, $motdepasse){
 
-		$device_token = sha1($email . sha1($password));
+		$device_token = sha1($email . sha1($motdepasse));
 
 		$data = array(
 				'email' 		=>	  $email, 

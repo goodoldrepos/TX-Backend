@@ -5,8 +5,8 @@
     <div class="row">
     	<div class="span6">
     	<?php echo validation_errors(); ?>
-    	<?php echo form_open('chaffeurs/create') ?>
-    	<legend>Inscription Chaffeur</legend>
+    	<?php echo form_open('chauffeurs/create') ?>
+    	<legend>Inscription Chauffeur</legend>
     		<input type="text" class="input-block-level" name="nom" placeholder="Nom" />
 			<input type="text" class="input-block-level" name="prenom" placeholder="Prenom" />
 			<input type="text" class="input-block-level" name="email" placeholder="Email" />

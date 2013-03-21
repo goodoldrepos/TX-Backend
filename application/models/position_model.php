@@ -1,17 +1,19 @@
 <?php  
 
-class Position_model extends CI_Model {
+class position_model extends CI_Model {
 	
 	public function update_position($id, $lat, $long){
 		$data = array(
 			'latitude' 		=> $lat, 
 			'longitude' 	=> $long,
-			'id_chaffeur' 	=> $id
+			'id_chauffeur' 	=> $id
 		);
 
 
-		$q = $this->db->where('id_chaffeur', $id)->get('positions');
+		$q = $this->db->where('id_chauffeur', $id)->get('positions');
+
 		if($q->num_rows > 0){
+			$this->db->where('id_chauffeur', $id);
 			$this->db->update('positions', $data); 
 		}else{
 			$this->db->insert('positions', $data); 
