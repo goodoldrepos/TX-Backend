@@ -1,9 +1,6 @@
 <?php 
-
 class reservation_model extends CI_Model{
 	
-
-
 	//create new reservation
 	public function create_reservation($depart, $destination, $id){
 		
@@ -129,17 +126,31 @@ class reservation_model extends CI_Model{
                		'status' => 'accepted', 
                		'id_chauffeur' => $id_chauffeur
             	);
+
+            	$this->load->library('apn');
+        		$this->apn->payloadMethod = 'enhance'; // you can turn on this method for debuggin purpose
+        		$this->apn->connectToPush();
+        		$message = "Le Taxi # " . $id_chauffeur . " est en route" ;
+        		$device_token = '28b8d54cac775b507d8a51c46424b1c12361cd153dfed4442821d3e50a92ca77';
+        		$send_result = $this->apn->sendMessage($device_token, $message, /*badge*/ 2, /*sound*/ 'default'  );
+        		$this->apn->disconnectPush();
+
+
 				$this->db->where('id', $id_reservation);
 				$this->db->update('reservations', $data);
 				return true;
-
 			}else{
-				return 'no pending'; 
+				return false; 
 			}
 		}else{
-			return 'no reservation for ' . $id_reservation;
+			return false;
 		}
 	}
 
+	public function push($id_chaffeur){
+
+		
+
+	}
 
 }
