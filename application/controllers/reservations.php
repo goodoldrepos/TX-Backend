@@ -1,6 +1,6 @@
 <?php  
 
-class Reservations extends CI_Controller{
+class Reservations extends CI_Controller{ 
 
 	public function __construct(){
 		parent::__construct();
@@ -11,29 +11,28 @@ class Reservations extends CI_Controller{
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('depart', 'Départ', 'required');
-		$this->form_validation->set_rules('code_postale', 'Code Postale', 'required');
       	$this->form_validation->set_rules('destination', 'Destination', 'required');
 
       	if ( $this->form_validation->run() !== false ) {
 
       		//recuperer champs formulaire
 			$data = array(
-				'ville' 		=> $this->input->post('ville'),
-				'depart' 			=> $this->input->post('depart'),
-				'cp' 			=> $this->input->post('code_postale'),
+				'depart' 		=> $this->input->post('depart'),
 				'destination' 	=> $this->input->post('destination'),
+				'ville'			=> "Paris",
 				'passagers' 	=> $this->input->post('nombre_passagers'),
 				'bagages' 		=> $this->input->post('nombre_bagages')
 			);
 
-			//stocker les informations du formulaire dans la session
+			//stocker les informations saisi dans la session pour les re-utiliser plus tard
 			$this->session->set_userdata('reservation', $data);
 
 
-			//si utilisateur connecté, afficher homepage sinon page incription. 
+			//verifier si l'utilisteur est connecte ou pas
 			if($this->session->userdata('user_id')){
 				redirect('pages/home');
 			}else{
+				//afficher la page d'inscription
 				redirect('users/create');
 			}
 

@@ -21,16 +21,28 @@ class Example extends REST_Controller
         }
 
         if($this->user_model->sign_in($this->post('email'), $this->post('pwd'))){
-
+            
             $r = $this->user_model->sign_in( $this->post('email'), $this->post('pwd') );
+            $this->user_model->add_apn($r->id, $this->post('apn'));
             //send response
-            $this->response(array('status' => 'done', 'user_id' => $r->id, 'profil' => $r), 200);
+            $this->response(array('status' => 'done', 'user_id' => $r->id, 'profil' => $r, 'apn' => $this->post('apn')), 200);
 
         }else{
             //send response
             $this->response(array('status' => 'Error Auth'), 200);
         }
        
+    }
+
+    //sign out
+    function logout_post(){
+        $this->user_model->remove_apn($this->post('id'));
+        $this->response(array('status' => 'done', 'action' => 'removeAPNToken'), 200);
+    }
+
+
+    function apnToken_post(){
+        $this->response(array('status' => 'done', 'action' => 'addAPNToken'), 200);
     }
 
     //fetch les positions des taxis
@@ -65,7 +77,7 @@ class Example extends REST_Controller
         
     }
 
-    //get any current reservation
+    //get any current reservation (if there is one)
     function reservation_get(){
 
         $r = $this->reservation_model->get_current_reservation($this->get('id'));
@@ -79,6 +91,7 @@ class Example extends REST_Controller
 
     }
 
+    //user can cancel reservation
     function cancelReservation_get(){
         $this->reservation_model->delete($this->get('id'));
         $this->response(array('action' => 'cancelReservation', 'status' => 'done'), 200);
@@ -127,15 +140,4 @@ class Example extends REST_Controller
         }
     }
 
-
-	public function send_post()
-	{
-		var_dump($this->request->body);
-	}
-
-
-	public function send_put()
-	{
-		var_dump($this->put('foo'));
-	}
 }

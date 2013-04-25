@@ -85,10 +85,9 @@
     	<?php echo validation_errors(); ?>
     	<?php echo form_open('reservations/immediate', array('id' => 'reservationForm')) ?>
 			<label>Départ</label>
-				<input type="text" class="required input-block-level" class="required" name="depart" placeholder="Adresse" />
-				<input type="text" class="required input-block-level" name="code_postale" placeholder="Code Postale" />
+				<input type="text" class="required input-block-level" class="required" name="depart" placeholder="Saisir l'adresse de départ ..." />				
 			<label>Destination</label>
-			<input type="text" class="required input-block-level" name="destination" placeholder="Adresse" />	
+			<input type="text" class="required input-block-level" name="destination" placeholder="Saisir l'adresse de destionation ..." />	
 			<label>Nombre de passagers</label>
 			<select name="nombre_passagers" class="input-block-level">
 				<option name="1" >1</option>

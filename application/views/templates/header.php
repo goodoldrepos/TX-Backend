@@ -2,10 +2,10 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
   <title></title>
-  <link href="<?php echo base_url('css/bootstrap.css'); ?>" rel="stylesheet" type="text/css">
+  <link href="<?php echo base_url('css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url('css/app.css'); ?>" rel="stylesheet" type="text/css">
   <script src="<?php echo base_url('js/jquery.js'); ?>"></script>
-  <script src="<?php echo base_url('js/bootstrap.js'); ?>"></script>
+  <script src="<?php echo base_url('js/bootstrap.min.js'); ?>"></script>
   <script src="<?php echo base_url('js/jquery.validate.js'); ?>"></script>
   <script src="<?php echo base_url('js/maps.js'); ?>"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>

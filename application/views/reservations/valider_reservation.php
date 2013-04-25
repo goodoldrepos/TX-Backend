@@ -34,17 +34,12 @@
       <table class="table">
         
         <tr>
-          <td>Rue</td>
+          <td>Adresse de départ</td>
           <td>
             <?php echo $depart; ?></td>
         </tr>
         <tr>
-          <td>Code Postale</td>
-          <td>
-            <?php echo $cp; ?></td>
-        </tr>
-        <tr>
-          <td>Destination</td>
+          <td>Adresse de destination</td>
           <td>
             <?php echo $destination; ?></td>
         </tr>

@@ -1,16 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
-function lookup($string){
+function lookup($i_addr){
  
-   $string = str_replace (" ", "+", urlencode($string));
-   $details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$string."&sensor=false";
+   $addr = str_replace (" ", "+", urlencode($i_addr));
+   $details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$addr."&sensor=false";
  
    $ch = curl_init();
    curl_setopt($ch, CURLOPT_URL, $details_url);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
    $response = json_decode(curl_exec($ch), true);
  
-   // If Status Code is ZERO_RESULTS, OVER_QUERY_LIMIT, REQUEST_DENIED or INVALID_REQUEST
    if ($response['status'] != 'OK') {
     return null;
    }

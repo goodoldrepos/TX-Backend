@@ -8,7 +8,6 @@ class Users extends CI_Controller{
 	}
 
 	public function create(){
-
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('nom', 'Nom', 'required');
 		$this->form_validation->set_rules('prenom', 'Prenom', 'required');
@@ -25,7 +24,7 @@ class Users extends CI_Controller{
                   				$this->input->post('telephone'),
                   				$this->input->post('email'),
                   				$this->input->post('motdepasse')
-                  );
+               	  );
 
          	$this->session->set_userdata('user_id', $id);
          	$this->session->set_userdata('username', $this->input->post('nom') . " " . $this->input->post('prenom'));
@@ -38,6 +37,7 @@ class Users extends CI_Controller{
 
 	}
 
+	//modifier le mot de passe depuis la page "gestion du compte"
 	public function password($id){
 
 		$feedback = NULL;
@@ -83,6 +83,7 @@ class Users extends CI_Controller{
 		
 	}
 
+	//afficher le profil utilisateur
 	public function show($id){
 			
 		$user = $this->user_model->get_user($id);
@@ -100,10 +101,12 @@ class Users extends CI_Controller{
 
 	}
 
+	//modifier le profil utilisateur depuis la page "gestion du compte"
 	public function update($id = NULL){
 
 		$this->session->set_userdata('feedback', NULL);
 
+		// si utilisateur pas connecté, redirigé vers page inscription
 		if(!$this->session->userdata('user_id') || $id == NULL){
 			redirect('sessions/create');
 		}
@@ -116,7 +119,7 @@ class Users extends CI_Controller{
 		$this->form_validation->set_rules('nom', 'Nom', 'required');
 		$this->form_validation->set_rules('prenom', 'Prenom', 'required');
 		$this->form_validation->set_rules('telephone', 'Telephone', 'required|numeric');
-      	$this->form_validation->set_rules('email', 'Adresse Email', 'valid_email|required');
+      	$this->form_validation->set_rules('email', 'Adresse Email', 'valid_email|required|callback_email_check');
 
 		if( $this->form_validation->run() !== false ){
 
@@ -151,10 +154,10 @@ class Users extends CI_Controller{
 		
 	}
 
-	public function email_check($str)
+	public function email_check($email)
 	{
 
-		if (!$this->user_model->email_check())
+		if (!$this->user_model->email_check($email))
 		{
 			$this->form_validation->set_message('email_check', 'The %s field is incorrect');
 			return FALSE;

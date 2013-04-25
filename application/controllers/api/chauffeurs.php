@@ -78,13 +78,7 @@ class chauffeurs extends REST_Controller
         }
     }
 
-    //fetch les positions des taxis
-    function getChauffeurs_get(){
-        //$c = $this->position_model->allPositions();
-        //$this->response(array('action' => 'getChauffeurs', 'chauffeurs' => $c->result_array(), 'status' => 'done' ) ,200);
-        
-          
-    }
+    
     
 
 }

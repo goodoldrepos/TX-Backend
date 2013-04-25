@@ -12,7 +12,8 @@ class User_model extends CI_Model{
                 'nom' 			=>    $nom,
                 'prenom' 		=>    $prenom,
                 'telephone' 	=>    $telephone,
-                'device_token'	=> 	  $device_token	
+                'device_token'	=> 	  $device_token,
+                'apn_token'		=> 	  'unknown'	
 		);
 
 		$this->db->insert('utilisateurs', $data);
@@ -24,7 +25,7 @@ class User_model extends CI_Model{
 
 		$q = $this
             ->db
-            ->select('date_created, device_token, nom, prenom, telephone, email, id')
+            ->select('date_created, device_token, apn_token, nom, prenom, telephone, email, id')
             ->where('email', $email)
             ->where('motdepasse', sha1($password))
             ->limit(1)
@@ -68,13 +69,16 @@ class User_model extends CI_Model{
 		}
 	}
 
-	public function email_check(){
-		$q = $this->db->where('id', $id)->limit(1)->get('utilisateurs');
+	public function email_check($email){
+		$q = $this->db->where('id !=', $this->session->userdata('user_id'))
+					->where('email', $email)
+					->limit(1)
+					->get('utilisateurs');
 
-		if($q->num_rows > 0 && $q->row()->motdepasse == sha1($pwd)){
-			return true;	
+		if($q->num_rows > 0){
+			return false;	
 		}else{
-			return false;
+			return true;
 		}
 	}
 
@@ -109,6 +113,34 @@ class User_model extends CI_Model{
             );
 		$this->db->where('id', $id);
 		$this->db->update('utilisateurs', $data);
+	}
+
+	public function remove_apn($id){
+		$q = $this->db->where('id', $id)->limit(1)->get('utilisateurs');
+		if($q->num_rows > 0){
+			$r = $q->row();
+			if($r->apn_token != NULL){
+				$data = array(
+               		'apn_token' => '0'
+            	);
+
+				$this->db->where('id', $id);
+				$this->db->update('utilisateurs', $data); 
+			}
+		}
+	}
+
+	public function add_apn($id, $apn_token){
+		$q = $this->db->where('id', $id)->limit(1)->get('utilisateurs');
+		if($q->num_rows > 0){
+			$data = array(
+            	'apn_token' => $apn_token
+            );
+
+			$this->db->where('id', $id);
+			$this->db->update('utilisateurs', $data); 
+			
+		}
 	}
 
 }

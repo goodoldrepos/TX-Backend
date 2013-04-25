@@ -20,17 +20,16 @@ function getMap(){
       $.get('/tx/index.php/pages/fetchClient', function(data) {
 
         var val = data.split(" ");
-        console.log("Client: " + data);
         latitude = val[0];
         longitude = val[1];
 
         if(!rendered){
           map = new GMaps({
-          el: '#basic_map',
-          lat: latitude,
-          lng: longitude
+            el: '#basic_map',
+            lat: latitude,
+            lng: longitude
           });
-          rendered = true;
+          rendered = true; //map already rendered
         }
         
         map.addMarker({
@@ -43,9 +42,6 @@ function getMap(){
       });
 
       $.get('/tx/index.php/pages/fetchChauffeurs', function(data) {
-
-        //var val = data.split(" ");
-        console.log("Chauffeurs: " + data);
 
         var obj = jQuery.parseJSON(data);
 
