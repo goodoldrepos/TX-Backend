@@ -2,15 +2,9 @@
 
 class chauffeur_model extends CI_Model {
 	
-	public function create_chauffeur(){
+	public function create_chauffeur($data){
 		
-		$data = array(
-				'email' 		=>	  $this->input->post('email'), 
-                'motdepasse' 	=>    sha1($this->input->post('motdepasse')),
-                'nom' 			=>    $this->input->post('nom'),
-                'prenom' 		=>    $this->input->post('prenom'),
-                'telephone' 	=>    $this->input->post('telephone'),
-		);
+		
 
 		$this->db->insert('chauffeurs', $data);
 
