@@ -18,7 +18,7 @@
  			<label>Téléphone</label>
 			<input type="text" class="input-block-level" name="telephone" placeholder="" />
 			<label>Mot de passe</label>
-  			<input type="text" class="input-block-level" name="motdepasse" placeholder="" />
+  			<input type="password" class="input-block-level" name="motdepasse" placeholder="" />
   			<label>Addresse</label>
  			<input type="text" class="input-block-level" name="adresse" placeholder="" />
  			<label>Numéro de Stationnement</label>

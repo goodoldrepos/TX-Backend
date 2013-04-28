@@ -28,25 +28,25 @@
 
 <div class="row">
 	<div class="span12">
-		<h1>Modifier Profil <small><?php echo $nom . ' ' .$prenom; ?></small></h1>
+        <div class="page-header">
+            <h3>Modifier votre profil</h3>
+        </div>
 	</div>
 </div>
-
-<br/><br/>
 
 <div class="row">
 	<div class="span4">
 		<?php echo form_open('users/update/' . $id,array('id' => 'editForm')); ?>
-		<label>Nom</label>
+		<label>Votre nom</label>
 		<input type="text" class="required input-block-level" name="nom" value="<?php echo $nom; ?>" />
-		<label>Prenom</label>
+		<label>Votre prénom</label>
 		<input type="text" class="required input-block-level" name="prenom" value="<?php echo $prenom; ?>" />
-		<label>Email</label>
+		<label>Votre Email</label>
 		<input type="text" class="required email input-block-level" name="email" value="<?php echo $email; ?>" />
-		<label>Téléphone Mobile</label>
+		<label>Votre téléphone mobile</label>
 		<input type="text" class="required digits input-block-level" name="telephone" value="<?php echo $telephone; ?>" />
 		<br/>
-		<input type="submit" class="btn btn-success" value="Mettre à jour" />
+		<input type="submit" class="btn btn-primary" value="Mettre à jour" />
 		<input type="reset" class="btn" value="Annuler" />
 		<?php echo form_close(); ?>
 	</div>
@@ -55,10 +55,16 @@
 <br/><br/>
 
 
+    <div class="row">
+        <div class="span12">
+            <div class="page-header">
+                <h3>Modifier mot de passe</h3>
+            </div>
+        </div>
+    </div>
+
 <div class="row">
 	<div class="span4">
-		<h3>Modifier mot de passe</h3>
-
 		<?php echo form_open('users/password/' . $id,array('id' => 'pwdForm')); ?>
 		<label>Ancien mot de passe</label>
 		<input type="password" class="required input-block-level" name="ancien_motdepasse" />
@@ -67,7 +73,7 @@
 		<label>Confirmer nouveau mot de passe</label>
 		<input type="password" class="required input-block-level" name="confirmation_motdepasse" />
 		<br/>
-		<input type="submit" class="btn btn-success" value="Envoyer" />
+		<input type="submit" class="btn btn-primary" value="Envoyer" />
 		<input type="reset" class="btn" value="Annuler" />
 		<?php echo form_close(); ?>
 	</div>

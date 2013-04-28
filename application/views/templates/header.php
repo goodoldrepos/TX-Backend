@@ -56,23 +56,22 @@
     <ul class="nav pull-right">
       <li >
         <a href="<?php echo site_url('pages/home'); ?>"><i class="icon-home icon-white"></i> Accueil</a>
-      </li>
-      <li >
-        <a href="<?php echo site_url('pages/services'); ?>"><i class="icon-th-large icon-white"></i>  Services</a>
-      </li>
-      <li >
-        <a href="<?php echo site_url('pages/tarifs'); ?>"> <i class="icon-tags icon-white"></i> Tarifs</a>
-      </li>      
+      </li>     
       <?php if($this->session->userdata('user_id')){ ?>
       <li id="fat-menu" class="dropdown">
         <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
           <i class="icon-plus-sign icon-white"></i> <?php echo $this->session->userdata('username'); ?> <b class="caret"></b>
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-          
+          <?php if($this->session->userdata('role') == 'client'){ ?>
           <li>
             <a href="<?php echo site_url('users/update') . '/' . $this->session->userdata('user_id'); ?>"><i class="icon-user"></i> Gestion du compte</a>
           </li>
+          <?php }elseif($this->session->userdata('role') == 'chauffeur'){ ?>
+            <!--<li>
+                  <a href="<?php echo site_url('chauffeurs/update') . '/' . $this->session->userdata('user_id'); ?>"><i class="icon-user"></i> Gestion du compte</a>
+              </li>-->
+          <?php } ?>
           <?php if(is_admin($this->session->userdata('user_id'))){ ?>
             <li>
               <a href="<?php echo site_url('pages/admin'); ?>"><i class="icon-cog"></i> Espace Administration</a>
@@ -88,10 +87,13 @@
       
     <?php }else{ ?>
     <li>
-        <a href="<?php echo site_url('pages/chauffeurs') ?>"><i class="icon-plane icon-white"></i> Espace Chauffeurs</a>
+        <a href="<?php echo site_url('pages/chauffeurs') ?>"><i class="icon-road icon-white"></i> Espace Chauffeur</a>
+    </li>
+    <li>
+      <a href="<?php echo site_url('sessions/create'); ?>"><i class="icon-user icon-white"></i> S'identifier</a>
     </li>
     <li  >
-      <a href="<?php echo site_url('sessions/create'); ?>"><i class="icon-circle-arrow-right icon-white"></i> Connexion</a>
+      <a href="<?php echo site_url('users/create'); ?>"><i class="icon-plus-sign icon-white"></i> S'inscrire</a>
     </li>
     <?php } ?>
     </ul>

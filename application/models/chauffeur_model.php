@@ -18,7 +18,7 @@ class chauffeur_model extends CI_Model {
             ->db
             ->select('date_created, nom, prenom, telephone, email, id')
             ->where('email', $email)
-            ->where('motdepasse', $password)
+            ->where('motdepasse', sha1($password))
             ->limit(1)
             ->get('chauffeurs');
 

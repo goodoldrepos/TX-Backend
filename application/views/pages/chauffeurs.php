@@ -14,6 +14,9 @@
     			<a href="<?php echo site_url('chauffeurs/signup'); ?>" class="btn btn-primary btn-large">
       			S'inscrire
     			</a>
+                <a href="<?php echo site_url('chauffeurs/signin'); ?>" class="btn btn-success btn-large">
+                    S'identifier
+                </a>
   			</p>
 		</div>
 		</div>

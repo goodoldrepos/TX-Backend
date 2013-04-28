@@ -24,6 +24,7 @@ class Sessions extends CI_Controller{
          if ( $res !== false ) {
             $this->session->set_userdata('user_id', $res->id);
             $this->session->set_userdata('username', $res->nom . " " . $res->prenom);
+            $this->session->set_userdata('role','client');
             redirect('pages/home');
          }
 

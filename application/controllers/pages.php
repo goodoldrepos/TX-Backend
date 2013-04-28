@@ -23,10 +23,12 @@ class Pages extends CI_Controller {
 				$this->load->view("reservations/valider_reservation", $data);
 
 			}
-			//sinon
-			else{
+			elseif($this->session->userdata('role') == 'client'){
 				$this->load->view("pages/home_in"); 	
-			} 
+			}elseif($this->session->userdata('role') == 'chauffeur'){
+                $this->load->view("chauffeurs/home");
+            }
+
 		//sinon
 		}else{
 			$this->load->view("pages/home");

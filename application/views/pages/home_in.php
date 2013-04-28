@@ -2,11 +2,11 @@
 .map {
   display: block;
   width: 100%;
-  height: 200px;
+  height: 300px;
   margin: 0 auto;
-  -webkit-box-shadow: 6px 5px 7px rgba(50, 50, 50, 0.26);
-  -moz-box-shadow:    6px 5px 7px rgba(50, 50, 50, 0.26);
-  box-shadow:         6px 5px 7px rgba(50, 50, 50, 0.26);
+  #-webkit-box-shadow: 6px 5px 7px rgba(50, 50, 50, 0.26);
+  #-moz-box-shadow:    6px 5px 7px rgba(50, 50, 50, 0.26);
+  #box-shadow:         6px 5px 7px rgba(50, 50, 50, 0.26);
 }
 
 </style>
@@ -15,9 +15,32 @@
 <br/>
 <br/>
 
+
+
+
 <script type="text/javascript">getMap(); //charger the map. </script>
 
 <div class="container">
+
+    <div class="row">
+        <div class="span12">
+            <div class="page-header">
+                <h1>Tableau de bord</h1>
+            </div>
+        </div>
+    </div>
+
+    <?php if(reservation_encours($this->session->userdata('user_id'))){ ?>
+    <div class="row">
+        <div class="span12">
+
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                Votre taxi est en route ! Vous allez recevoir une confirmation par e-mail d'ici quelques minutes.
+            </div>
+        </div>
+    </div>
+    <?php } ?>
 
   <div class="row">
     <div class="span12">
@@ -31,14 +54,20 @@
   <?php if(!reservation_encours($this->session->userdata('user_id'))){ ?>
   <div class="row">
     <div class="span12">
+        <div class="row">
+            <div class="span12">
+                <div class="page-header">
+                    <h3>Commander un taxi</h3>
+                </div>
+            </div>
+        </div>
   <div class="tabbable">
-    <!-- Only required for left/right tabs -->
     <ul class="nav nav-tabs">
       <li class="active">
         <a href="#tab1" data-toggle="tab">Taxi Immédiat</a>
       </li>
       <li>
-        <a href="#tab2" data-toggle="tab">Demande à l'avance</a>
+        <a href="#tab2" data-toggle="tab">Commander à l'avance</a>
       </li>
     </ul>
     <div class="tab-content">
@@ -61,7 +90,7 @@
               <option>2</option>
             </select>
             <br/>
-            <input type="submit" class="btn btn-success" value="Continuer" >
+            <input type="submit" class="btn btn-success" value="Envoyer commande" >
             <?php echo form_close() ?></div>
         </div>
       </div>
@@ -72,20 +101,5 @@
   </div>
   </div>
   </div>
-
-  <?php }else{ ?>
-
-  <div class="row">
-      <div class="span12">
-    <div class="alert alert-success">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      Votre taxi est en route ! Vous allez recevoir une confirmation par e-mail d'ici quelques minutes.
-    </div>
-  </div>
-  </div>
-  
-
-
   <?php } ?>
-
 </div>

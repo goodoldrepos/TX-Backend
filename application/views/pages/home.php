@@ -25,7 +25,6 @@
 		.features{
 			position:relative;
 			bottom:350px;
-			background: url("<?php echo base_url('images/features-bg.png'); ?>") no-repeat scroll 0 0 transparent;
 		}
 
 		.reasons{
@@ -45,7 +44,7 @@
 			width:200px;
 		}
 
-        #linebreak {
+        .linebreak {
             background: url("<?php echo base_url('images/linebreak.png'); ?>") center center no-repeat;
             height: 2px;
             border: 0;
@@ -63,6 +62,7 @@
             position:relative;
             bottom:250px;
             padding-bottom: 50px;
+            background: url("<?php echo base_url('images/features-bg.png'); ?>") no-repeat scroll 0 0 transparent;
         }
 
         .tarifs span{
@@ -103,10 +103,10 @@
     </div>
 
     <script type="text/javascript">
-    $(document).ready(function(){
-        $("#reservationForm").validate();
-    });
-</script>
+        $(document).ready(function(){
+            $("#reservationForm").validate();
+        });
+    </script>
 
 <div class="container">
 
@@ -162,7 +162,7 @@
 
     <div class="row tarifs">
         <div class="span12">
-            <div id="linebreak"></div>
+            <div class="linebreak"></div>
                 <center>
                     <h3>+ Nos services sont totalement gratuit.</h3>
                     <span>0<sup><small>&#8364; *</small></sup></span>
@@ -178,9 +178,9 @@
 
     <div class="row mobile">
         <div class="span12">
-            <div id="linebreak"></div>
+            <div class="linebreak"></div>
                 <center>
-                <h2><span class="purple">Un taxi depuis votre smartphone.</span></h2>
+                <h2><span class="purple">Un taxi, depuis votre smartphone !</span></h2>
                 <h3><small>- Téléchargement gratuit - </small> </h3>
                 <br/>
                 <a href="#">

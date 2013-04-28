@@ -20,6 +20,14 @@
 
 <div class="container">
 
+    <div class="row">
+        <div class="span12">
+            <div class="page-header">
+                <h1>Valider la commande</h1>
+            </div>
+        </div>
+    </div>
+
   <div class="row">
     <div class="span12">
       <div id="basic_map" class="map"></div>
@@ -32,7 +40,7 @@
   <div class="row">
     <div class="span6">
       <table class="table">
-        
+          <h1><small>Informations sur votre commande</small></h1>
         <tr>
           <td>Adresse de départ</td>
           <td>
@@ -57,7 +65,7 @@
       <br/>
       <a href="<?php echo site_url('reservations/process_immediate'); ?>
         ">
-        <input type="button" class="btn btn-success" value="Confirmer" />
+        <input type="button" class="btn btn-success" value="Confirmer la commande" />
       </a>
       <a href="<?php echo site_url('reservations/annuler'); ?>
         ">
