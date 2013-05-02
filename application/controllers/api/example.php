@@ -85,7 +85,7 @@ class Example extends REST_Controller
         if($r){
             $this->response(array('action' => 'getReservation', 'reservation' => $r, 'status' => 'done'), 200);
         }else{
-            $this->response(array('action' => 'getReservation', 'status' => 'no reservation'), 200);
+            $this->response(array('action' => 'getReservation', 'status' => 'none'), 200);
 
         }
 

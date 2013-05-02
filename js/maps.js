@@ -23,6 +23,8 @@ function getMap(){
         latitude = val[0];
         longitude = val[1];
 
+        console.log(latitude + " " + longitude);
+
         if(!rendered){
           map = new GMaps({
             el: '#basic_map',

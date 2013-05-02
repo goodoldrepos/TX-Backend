@@ -30,13 +30,13 @@
         </div>
     </div>
 
-    <?php if(reservation_encours($this->session->userdata('user_id'))){ ?>
+    <?php if(reservation_encours($this->session->userdata('user_id')) != null){ ?>
     <div class="row">
         <div class="span12">
 
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                Votre taxi est en route ! Vous allez recevoir une confirmation par e-mail d'ici quelques minutes.
+                <?php echo reservation_encours($this->session->userdata('user_id')); ?>
             </div>
         </div>
     </div>

@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dbc6ff0-d0e1-49e9-9be9-106b0cbb7494" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/chauffeurs/home.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/chauffeurs/signin.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/tx.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/application/views/pages/chaffeurs.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/chauffeur_model.php" afterPath="$PROJECT_DIR$/application/models/chauffeur_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/chauffeurs.php" afterPath="$PROJECT_DIR$/application/controllers/chauffeurs.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/pages/chauffeurs.php" afterPath="$PROJECT_DIR$/application/views/pages/chauffeurs.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/chauffeurs/create.php" afterPath="$PROJECT_DIR$/application/views/chauffeurs/create.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/templates/header.php" afterPath="$PROJECT_DIR$/application/views/templates/header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/pages/home.php" afterPath="$PROJECT_DIR$/application/views/pages/home.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/pages/home_in.php" afterPath="$PROJECT_DIR$/application/views/pages/home_in.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/pages.php" afterPath="$PROJECT_DIR$/application/controllers/pages.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/sessions.php" afterPath="$PROJECT_DIR$/application/controllers/sessions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/users/update.php" afterPath="$PROJECT_DIR$/application/views/users/update.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reservations/valider_reservation.php" afterPath="$PROJECT_DIR$/application/views/reservations/valider_reservation.php" />
     </list>
     <ignored path="tx.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -76,7 +57,7 @@
       <file leaf-file-name="valider_reservation.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/reservations/valider_reservation.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="60" selection-start="910" selection-end="910" vertical-scroll-proportion="0.18644068">
+            <state line="1" column="2" selection-start="26" selection-end="26" vertical-scroll-proportion="0.025423728">
               <folding />
             </state>
           </provider>
@@ -576,7 +557,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reservations/valider_reservation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="60" selection-start="910" selection-end="910" vertical-scroll-proportion="0.18644068">
+        <state line="1" column="2" selection-start="26" selection-end="26" vertical-scroll-proportion="0.025423728">
           <folding />
         </state>
       </provider>

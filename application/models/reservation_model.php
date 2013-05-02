@@ -38,7 +38,7 @@ class reservation_model extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('reservations');
 		$this->db->where('id_utilisateur', $id);
-		$this->db->where('status', 'pending');
+		$this->db->where('status !=', 'done');
 		$this->db->join('adresses_depart', 'adresses_depart.id = reservations.id_depart');
 
 		$q = $this->db->get();
@@ -50,8 +50,8 @@ class reservation_model extends CI_Model{
 	// Check is if there is a reservation currently, return true or false. 
 	public function en_cours($id){
 
-		$q = $this->db->where('id_utilisateur',$id)->where('status','pending')->limit(1)->get('reservations');
-		if ( $q->num_rows > 0 ) return true;
+		$q = $this->db->where('id_utilisateur',$id)->where('status !=','done')->limit(1)->get('reservations');
+		if ( $q->num_rows > 0 ) return $q->row()->status;
     	else return false;
 	}
 
@@ -62,7 +62,7 @@ class reservation_model extends CI_Model{
 		$id = $this->session->userdata('user_id');
 		$reservation = $this->db
 							->where('id_utilisateur', $id)
-							->where('status', 'pending')
+							->where('status !=', 'done')
 							->limit(1)
 							->get('reservations'); 
 
@@ -84,12 +84,13 @@ class reservation_model extends CI_Model{
 	}
 
 	//cancel a reservation (not actually delete it yet)
-	public function delete($id){
-		$data = array( 'status' => 'done' );
+	public function delete($id, $status = "done"){
+		$data = array( 'status' => $status );
 		$this->db->where('id', $id);
 		$this->db->update('reservations', $data);
 		return true;
 	}
+
 
 	//get all reservations (active + archive)
 	public function get_all(){
@@ -116,6 +117,7 @@ class reservation_model extends CI_Model{
 
 	//un chauffeur accepte une reservation, faut lui confirmer. 
 	public function validate_reservation($id_reservation, $id_chauffeur){
+
 		$q = $this->db->where('id', $id_reservation)->get('reservations'); 
 
 		if($q->num_rows > 0 ){

@@ -29,6 +29,7 @@ class chauffeurs extends REST_Controller
    
     }
 
+    //receive new position from driver and update db
     function position_post(){
   
         if($r = $this->position_model->update_position($this->post('id'), $this->post('latitude'), $this->post('longitude'))){
@@ -39,6 +40,8 @@ class chauffeurs extends REST_Controller
     
     }
 
+
+    //receive accept request from driver and check if that's ok
     function acceptReservation_post(){
 
         if($this->reservation_model->validate_reservation($this->post('idReservation'), $this->post('idChauffeur'))){
@@ -52,8 +55,9 @@ class chauffeurs extends REST_Controller
 
     }
 
+    //ask to cancel reservation 
     function cancelReservation_post(){
-        if($this->reservation_model->delete($this->post('idReservation')))
+        if($this->reservation_model->delete($this->post('idReservation'), 'accepted' ))
         {
             $this->response(array('status' => 'done','id' => $this->post('idReservation'), 'action' => 'cancelReservation'), 200);
         }

@@ -64,7 +64,7 @@
 									</td>
 									<td>
 										<?php 
-											if($reservation->status == 'pending'){
+											if($reservation->status != 'done'){
 												echo "<a href=". site_url('reservations/destroy') . '/' . $reservation->id . ">Annuler</a>";
 											}else{
 												echo "&nbsp;";
