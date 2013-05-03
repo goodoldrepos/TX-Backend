@@ -18,8 +18,6 @@
 
 
 
-<script type="text/javascript">getMap(); //charger the map. </script>
-
 <div class="container">
 
     <div class="row">
@@ -31,6 +29,7 @@
     </div>
 
     <?php if(reservation_encours($this->session->userdata('user_id')) != null){ ?>
+    <script type="text/javascript">getMap("nearest");</script>
     <div class="row">
         <div class="span12">
 
@@ -40,6 +39,8 @@
             </div>
         </div>
     </div>
+    <?php }else{ ?>
+    <script type="text/javascript">getMap("all");</script>
     <?php } ?>
 
   <div class="row">

@@ -48,6 +48,8 @@ class position_model extends CI_Model {
 
 		$query = "SELECT *,(((acos(sin((" . $latitude . "*pi()/180)) * sin((`latitude`*pi()/180))+cos((" . $latitude. "*pi()/180)) * cos((`latitude`*pi()/180)) * cos(((" . $longitude . "- `longitude`)*pi()/180))))*180/pi())*60*1.1515*1.609344) AS distance FROM `positions` Having distance <= " . $distance . " order by distance" ;
 
+		
+
 		$q = $this->db->query($query);	
 		
 		if($q->num_rows > 0) return $q;

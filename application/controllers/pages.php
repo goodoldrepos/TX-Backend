@@ -71,7 +71,7 @@ class Pages extends CI_Controller {
     	if($coord != NULL){
     		$lat = $coord->latitude;
 			$long = $coord->longitude;
-			$c = $this->position_model->nearestPositions($lat, $long, 60);
+			$c = $this->position_model->nearestPositions($lat, $long, 200);
 		}else{
 			$c = $this->position_model->allPositions();
 		}

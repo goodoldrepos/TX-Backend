@@ -1,18 +1,20 @@
-function getMap(){
+function getMap(mode){
         
     var rendered = false;
 
-    fetch();
-    
-    window.setInterval(function() { fetch(); }, 5000);
+    fetchClient(); 
+    window.setInterval(function() { fetchClient(); }, 10000);
+
     
 
-    function fetch(){
+    function fetchClient(){
       $.get('/tx/index.php/pages/fetchClient', function(data) {
 
         var val = data.split(" ");
         latitude = val[0];
         longitude = val[1];
+
+
 
         if(!rendered){
           if(latitude == -10 && longitude == -10){
@@ -23,7 +25,6 @@ function getMap(){
             long = longitude; 
           }
 
-
           map = new GMaps({
             el: '#basic_map',
             lat: lat,
@@ -31,7 +32,8 @@ function getMap(){
           });
           rendered = true; //map already rendered
         }
-        
+
+        map.removeMarkers();
 
 
         if(latitude != -10 && longitude != -10){
@@ -41,62 +43,55 @@ function getMap(){
           title: 'Home',
           click: function(e) { alert('Vous êtes ici!'); }
           }); 
+          console.log("IN");
         }
-        
+
+        fetchChauffeurs();
 
       });
+    }
 
+    function fetchChauffeurs(){
       $.get('/tx/index.php/pages/fetchChauffeurs', function(data) {
 
         var obj = jQuery.parseJSON(data);
 
-        map.removeMarkers();
-        map.removeOverlays();
-
-        for(var j=0; j< obj.length;j++){
-          if(obj[j].distance < 10){
-            map.drawOverlay({
-            lat: obj[j].latitude,
-            lng: obj[j].longitude,
-            content: '<img src="http://www.certh.gr/img/icon_taxi-y.gif" />'
-            });
-          }else{
-            map.drawOverlay({
-            lat: obj[j].latitude,
-            lng: obj[j].longitude,
-            content: '<img src="http://images1.makemytrip.com/mmtimgs/RP/images/airline-logo/car.png" />'
-            });  
-          }
-        }
-
         console.log(data);
 
-        if(latitude != -10 && longitude != -10){
-          map.addMarker({
-          lat: latitude,
-          lng: longitude,
-          title: 'Home',
-          click: function(e) { alert('Vous êtes ici!'); }
-          }); 
-        }
+        map.removeOverlays();
+
+        if(mode == "all"){
+          for(var j=0; j< obj.length;j++){
+            map.drawOverlay({
+            lat: obj[j].latitude,
+            lng: obj[j].longitude,
+            content: '<img src="http://png-5.findicons.com/files/icons/951/google_maps/32/taxi.png" />'
+            });  
+          } 
+        }else if(mode == "nearest"){
+          for(var j=0; j< obj.length;j++){
+            if(obj[j].distance < 10){
+              map.drawOverlay({
+              lat: obj[j].latitude,
+              lng: obj[j].longitude,
+              content: '<img src="http://png-5.findicons.com/files/icons/951/google_maps/32/taxi.png" />'
+              });
+            }else{
+              map.drawOverlay({
+              lat: obj[j].latitude,
+              lng: obj[j].longitude,
+              content: '<img src="http://images1.makemytrip.com/mmtimgs/RP/images/airline-logo/car.png" />'
+              });  
+            }
+          }  
+        }  
 
       });
-
-
     }
-    
-    
-
-    
-    
-  
-    /*map.addMarker({
-      lat: latitude,
-      lng: longitude,
-      title: 'Home',
-      click: function(e) { alert('Vous etes ici'); }
-    });*/
   
 }
+    
+  
+
 
     

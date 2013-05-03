@@ -122,9 +122,6 @@
                 </center>
             </div>
         </div>
-        <div class="row">
-
-        </div>
     	<div class="span4 feature">
             <div class="well well-small">
     		<center>
@@ -140,7 +137,7 @@
             <div class="well well-small">
     		<center>
     			<h4>Payer par carte</h4>
-    			<img src="<?php echo base_url('images/card.png'); ?>">
+    			<img width="220" src="<?php echo base_url('images/card.png'); ?>">
     			<p>
     			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in leo ipsum, id pretium lectus. Mauris at adipiscing urna. Proin id nulla nulla, nec fringilla velit. 
     			</p>
@@ -164,15 +161,16 @@
         <div class="span12">
             <div class="linebreak"></div>
                 <center>
-                    <h3>+ Nos services sont totalement gratuit.</h3>
+                    <h3>Des services de luxe, gratuitement !</h3>
                     <span>0<sup><small>&#8364; *</small></sup></span>
                     <p>
-                        <h5><small>
-                            *Vous ne payez que pour le trajet jusqu'au point de rendez-vous lorsque le taxi est réservé.
-                        </small></h5>
+                        <h5>
+                            <small>
+                                *Vous ne payez que le trajet fait par le taxi jusqu'au point de rendez-vous.
+                            </small>
+                        </h5>
                     </p>
-                </center>
-                      
+                </center>          
         </div>
     </div>
 
