@@ -48,7 +48,11 @@ class Example extends REST_Controller
     //fetch les positions des taxis
     function chauffeurs_get(){
         $c = $this->position_model->allPositions();
-        $this->response(array('action' => 'getChauffeurs', 'chauffeurs' => $c->result_array(), 'status' => 'done' ) ,200);  
+        if($c != NULL){
+            $this->response(array('action' => 'getChauffeurs', 'chauffeurs' => $c->result_array(), 'status' => 'done' ) ,200);  
+        }else{
+            $this->response(array('action' => 'getChauffeurs', 'chauffeurs' => NULL, 'status' => 'error' ) ,200);  
+        }
     }
     
     //create a new user and return it's id. (for now ... a token later)
@@ -115,29 +119,10 @@ class Example extends REST_Controller
         }
         
     }
-
-    function user_delete()
-    {
-    	//$this->some_model->deletesomething( $this->get('id') );
-        $message = array('id' => $this->get('id'), 'message' => 'DELETED!');
-        
-        $this->response($message, 200); // 200 being the HTTP response code
-    }
     
-    function users_get()
+    function test_get()
     {
-        //$users = $this->some_model->getSomething( $this->get('limit') );
-        $users = $this->user_model->get_all();
-        
-        if($users)
-        {
-            $this->response($users, 200); // 200 being the HTTP response code
-        }
-
-        else
-        {
-            $this->response(array('status' => 'Couldn\'t find any users!'), 404);
-        }
+        $this->response("Up", 200); 
     }
 
 }

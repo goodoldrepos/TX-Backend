@@ -39,8 +39,19 @@ class position_model extends CI_Model {
 	}
 
 	public function allPositions(){
-		$q = $this->db->get('positions');
-		return $q;
+		$q = $this->db->get('positions');	
+		if($q->num_rows > 0) return $q;
+		else return NULL;	
+	}
+
+	public function nearestPositions($latitude, $longitude, $distance){
+
+		$query = "SELECT *,(((acos(sin((" . $latitude . "*pi()/180)) * sin((`latitude`*pi()/180))+cos((" . $latitude. "*pi()/180)) * cos((`latitude`*pi()/180)) * cos(((" . $longitude . "- `longitude`)*pi()/180))))*180/pi())*60*1.1515*1.609344) AS distance FROM `positions` Having distance <= " . $distance . " order by distance" ;
+
+		$q = $this->db->query($query);	
+		
+		if($q->num_rows > 0) return $q;
+		else return NULL;
 	}
 
 

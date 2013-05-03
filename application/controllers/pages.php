@@ -39,18 +39,10 @@ class Pages extends CI_Controller {
 	}
 
 
-	//show a map
-	public function maps(){
-		$this->load->view('templates/header');
-		$this->load->view('pages/maps');
-		$this->load->view('templates/footer');
-	}
-
-
-	//fetch data from a file and return it.
 	public function fetchClient(){
 
-    	$coord = $this->reservation_model->get_position_depart();
+		$id = $this->session->userdata('user_id');
+    	$coord = $this->reservation_model->get_position_depart($id);
     	
     	if($coord != NULL){
     		$lat = $coord->latitude;
@@ -62,9 +54,9 @@ class Pages extends CI_Controller {
 			$lat = $coord['latitude'];
 			$long = $coord['longitude'];
     	}else{
-    		//default values (Tour Eiffel)
-    		$lat = 48.85902;
-    		$long = 2.29332;
+    		//default values when here is location for user
+    		$lat = -10;
+    		$long = -10;
     	}
 		
 
@@ -72,15 +64,26 @@ class Pages extends CI_Controller {
 	}
 
 	public function fetchChauffeurs(){
-		$c = $this->position_model->allPositions();
-		$str = " ";
 
-		foreach ($c->result_array() as $row)
-		{
-    		$str .= $row['latitude'] . " ";
+		$id = $this->session->userdata('user_id');
+    	$coord = $this->reservation_model->get_position_depart($id);
+    	
+    	if($coord != NULL){
+    		$lat = $coord->latitude;
+			$long = $coord->longitude;
+			$c = $this->position_model->nearestPositions($lat, $long, 60);
+		}else{
+			$c = $this->position_model->allPositions();
 		}
 
-		echo json_encode($c->result_array());
+		if($c != NULL){
+			echo json_encode($c->result_array());
+		}else{
+			echo json_encode("Nothing");	
+		}
+
+
+		
 	}
 
 	public function chauffeurs(){
@@ -104,6 +107,13 @@ class Pages extends CI_Controller {
 			redirect('sessions/create');
 		}
 		
+	}
+
+	public function test(){
+		$c = $this->position_model->nearestPositions(48.8564026,2.2770679,4);
+		if($c != NULL){
+			echo json_encode($c->result_array());
+		}
 	}
 
 }

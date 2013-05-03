@@ -58,8 +58,9 @@ class reservation_model extends CI_Model{
 
 
 	//get position de depart for a given user_id
-	public function get_position_depart(){
-		$id = $this->session->userdata('user_id');
+	public function get_position_depart($id){
+
+		
 		$reservation = $this->db
 							->where('id_utilisateur', $id)
 							->where('status !=', 'done')

@@ -1,14 +1,5 @@
 function getMap(){
-    
-    var latitude = 48.85902;
-    var longitude = 2.29332;
-    
-    /*var map = new GMaps({
-      el: '#basic_map',
-      lat: latitude,
-      lng: longitude
-    });*/
-
+        
     var rendered = false;
 
     fetch();
@@ -23,23 +14,35 @@ function getMap(){
         latitude = val[0];
         longitude = val[1];
 
-        console.log(latitude + " " + longitude);
-
         if(!rendered){
+          if(latitude == -10 && longitude == -10){
+            lat = 48.858278;
+            long = 2.294254;
+          }else{
+            lat = latitude;
+            long = longitude; 
+          }
+
+
           map = new GMaps({
             el: '#basic_map',
-            lat: latitude,
-            lng: longitude
+            lat: lat,
+            lng: long
           });
           rendered = true; //map already rendered
         }
         
-        map.addMarker({
+
+
+        if(latitude != -10 && longitude != -10){
+          map.addMarker({
           lat: latitude,
           lng: longitude,
           title: 'Home',
           click: function(e) { alert('Vous êtes ici!'); }
-        }); 
+          }); 
+        }
+        
 
       });
 
@@ -50,20 +53,32 @@ function getMap(){
         map.removeMarkers();
         map.removeOverlays();
 
-        for(var j=0; j<obj.length;j++){
-          map.drawOverlay({
-          lat: obj[j].latitude,
-          lng: obj[j].longitude,
-          content: '<img src="http://www.certh.gr/img/icon_taxi-y.gif" />'
-          });
+        for(var j=0; j< obj.length;j++){
+          if(obj[j].distance < 10){
+            map.drawOverlay({
+            lat: obj[j].latitude,
+            lng: obj[j].longitude,
+            content: '<img src="http://www.certh.gr/img/icon_taxi-y.gif" />'
+            });
+          }else{
+            map.drawOverlay({
+            lat: obj[j].latitude,
+            lng: obj[j].longitude,
+            content: '<img src="http://images1.makemytrip.com/mmtimgs/RP/images/airline-logo/car.png" />'
+            });  
+          }
         }
 
-        map.addMarker({
+        console.log(data);
+
+        if(latitude != -10 && longitude != -10){
+          map.addMarker({
           lat: latitude,
           lng: longitude,
           title: 'Home',
           click: function(e) { alert('Vous êtes ici!'); }
-        });
+          }); 
+        }
 
       });
 
