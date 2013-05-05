@@ -49,7 +49,7 @@ class chauffeurs extends REST_Controller
             $this->response(array('status' => 'accepted','id' => $this->post('idReservation'), 'action' => 'confirmationReservation'), 200);
 
         }else{
-            $this->response(array('status' => 'notAccepted', 'action' => 'confirmationReservation'), 200);
+            $this->response(array('status' => 'notAccepted', 'id' => $this->post('idReservation'), 'action' => 'confirmationReservation'), 200);
         }
 
 
@@ -63,7 +63,7 @@ class chauffeurs extends REST_Controller
         }
         else
         {
-            $this->response(array('status' => 'error','action' => 'cancelReservation'), 200);
+            $this->response(array('status' => 'error','id' => $this->post('idReservation'), 'action' => 'cancelReservation'), 200);
         }
     }
 

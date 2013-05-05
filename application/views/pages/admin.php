@@ -1,8 +1,10 @@
 <div class="container">
 	<div class="row">
 		<div class="span12">
-			<h1>Administration</h1>
-			<br/><br/>
+				<div class="page-header">
+                <h1>Panneau d'administration</h1>
+            </div>			
+            <br/><br/>
 			<div class="tabbable tabs-right">
   				<ul class="nav nav-tabs">
   					<li class="active" ><a href="#tab2" data-toggle="tab"><i class="icon-road"></i> Réservations</a></li>
@@ -12,16 +14,18 @@
   				</ul>
   				<div class="tab-content">
   					<div class="tab-pane " id="tab1">
-      						<h3>Liste des clients</h3>
-
+      						<h2>Liste des clients</h2>
       						<table class="table table-bordered table-striped">
-								<thead><th>Prénom Nom</th><th>Adresse email</th><th>&nbsp;</th></thead>
+								<thead><th>Nom/Prénom</th><th>Numéro de portable</th><th>Adresse email</th><th>&nbsp;</th></thead>
 								<?php foreach($users as $user){ ?>
 								<tr>
 									<td>
 										<a href="<?php echo site_url('users/show') . '/' . $user->id; ?>" >
-											<?php echo $user->prenom . ' ' . $user->nom; ?>
+											<?php echo $user->nom . ' ' . $user->prenom; ?>
 										</a>
+									</td>
+									<td>
+										<?php echo $user->telephone; ?>
 									</td>
 									<td>
 										<?php echo $user->email; ?>
@@ -37,7 +41,7 @@
 								
     				</div>
     				<div class="tab-pane active" id="tab2">
-    					<h3>Liste des réservations</h3>
+    					<h2>Historique des réservations</h2>
       					<table class="table table-bordered table-striped">
 								<thead><th>#</th><th>Client</th><th>Adresse de départ</th><th>Adresse de destination</th><th>Statut</th><th>&nbsp;</th></thead>
 
@@ -70,8 +74,6 @@
 												echo "&nbsp;";
 											}
 										?>
-										
-								
 									</td>
 								</tr>
 								<?php } ?>

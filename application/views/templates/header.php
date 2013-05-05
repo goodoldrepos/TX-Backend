@@ -74,7 +74,7 @@
           <?php } ?>
           <?php if(is_admin($this->session->userdata('user_id'))){ ?>
             <li>
-              <a href="<?php echo site_url('pages/admin'); ?>"><i class="icon-cog"></i> Espace Administration</a>
+              <a href="<?php echo site_url('pages/admin'); ?>"><i class="icon-cog"></i> Panneau d'administration</a>
               <li class="divider"></li>
             </li>
           <?php } ?>

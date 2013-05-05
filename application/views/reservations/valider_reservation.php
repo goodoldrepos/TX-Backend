@@ -12,7 +12,7 @@
 
 </style>
 
-<script type="text/javascript">getMap(); //charger the map. </script>
+<script type="text/javascript">getMap("all"); //charger the map. </script>
 
 <img class="banner" src="<?php echo base_url('images/halfcity.jpg'); ?>">
 <br/>
