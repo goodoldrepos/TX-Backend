@@ -84,7 +84,7 @@ class reservation_model extends CI_Model{
 			
 	}
 
-	//cancel a reservation (not actually delete it yet)
+	//cancel a reservation
 	public function delete($id, $status = "done"){
 		$data = array( 'status' => $status );
 		$this->db->where('id', $id);
@@ -119,23 +119,27 @@ class reservation_model extends CI_Model{
 	//un chauffeur accepte une reservation, faut lui confirmer. 
 	public function validate_reservation($id_reservation, $id_chauffeur){
 
-		$q = $this->db->where('id', $id_reservation)->get('reservations'); 
+		$qreservation = $this->db->where('id', $id_reservation)->limit(1)->get('reservations'); 
 
-		if($q->num_rows > 0 ){
-			$r = $q->row(); 
-			if( $r->status == 'pending'){
+		//if there is actually a reservation with that number
+		if($qreservation->num_rows > 0 ){
+			$reservation = $qreservation->row();
+
+			//if that reservation is still pending, than make it accepted and send push notification/email 
+			if( $reservation->status == 'pending'){
 				$data = array(
                		'status' => 'accepted', 
                		'id_chauffeur' => $id_chauffeur
             	);
 
-            	$qu = $this->db->where('id', $r->id_utilisateur)->limit(1)->get('utilisateurs');
-            	if($qu->num_rows > 0){
-            		$u = $qu->row(); 
-            		$apn = $u->apn_token;
-            		if($apn == 'unknown'){
-            			$apn = '28b8d54cac775b507d8a51c46424b1c12361cd153dfed4442821d3e50a92ca77';
-            		}
+            	$quser = $this->db->where('id', $reservation->id_utilisateur)->limit(1)->get('utilisateurs');
+            	if($quser->num_rows > 0){
+            		$user = $quser->row();
+            		//$device_type = $user->device_type(); 
+            		$apn = $user->apn_token;
+
+            		//if the user is logged in on a smartphone then send him push notification
+            		if($apn != 'unknown'){
             			//send APN notification
             			$this->load->library('apn');
         				$this->apn->payloadMethod = 'enhance'; // you can turn on this method for debuggin purpose
@@ -143,12 +147,16 @@ class reservation_model extends CI_Model{
         				$message = "Le Taxi # " . $id_chauffeur . " est en route" ;
         				$send_result = $this->apn->sendMessage($apn, $message, /*badge*/ 1, /*sound*/ 'default'  );
         				$this->apn->disconnectPush();
-        				//--
+            		}else{
+            			//send an email to the user if he doesn't have our mobile app 
+            		}		
             	}
 
 				$this->db->where('id', $id_reservation);
 				$this->db->update('reservations', $data);
+
 				return true;
+
 			}else{
 				return false; 
 			}
@@ -157,9 +165,48 @@ class reservation_model extends CI_Model{
 		}
 	}
 
-	public function push($id_chaffeur){
+	function rappel($id_reservation){
 
-		
+		$qreservation = $this->db->where('id', $id_reservation)->limit(1)->get('reservations'); 
+		if($qreservation->num_rows > 0){
+
+			$data = array(
+               		'status' => 'feedback', 
+            );
+
+			$this->db->update('reservations', $data);
+
+
+			$reservation = $qreservation->row();
+			$quser = $this->db->where('id', $reservation->id_utilisateur)->limit(1)->get('utilisateurs');
+
+			if($quser->num_rows > 0){
+        		$user = $quser->row();
+        		//$device_type = $user->device_type; 
+        		$apn = $user->apn_token;
+
+        		//if the user is logged in on a smartphone then send him push notification
+        		if($apn != 'unknown'){
+        			//send APN notification
+        			$this->load->library('apn');
+    				$this->apn->payloadMethod = 'enhance'; // you can turn on this method for debugging purpose
+    				$this->apn->connectToPush();
+    				$message = "Votre Taxi est là !" ;
+    				$send_result = $this->apn->sendMessage($apn, $message, /*badge*/ 1, /*sound*/ 'default'  );
+    				$this->apn->disconnectPush();
+        		}else{
+        			//send an email to the user if he doesn't have our mobile app 
+        		}		
+           	}
+
+           	return TRUE;
+
+		}else{
+			return FALSE;
+		}
+	}
+
+	public function push($id_chaffeur){
 
 	}
 

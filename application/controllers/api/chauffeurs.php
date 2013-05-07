@@ -29,6 +29,8 @@ class chauffeurs extends REST_Controller
    
     }
 
+
+
     //receive new position from driver and update db
     function position_post(){
   
@@ -81,6 +83,17 @@ class chauffeurs extends REST_Controller
             $this->response(array('status' => 'Couldn\'t find any users!'), 404);
         }
     }
+
+    function rappel_post(){
+
+        if( $this->reservation_model->rappel($this->post("idReservation")) ){
+            $this->response(array('status' => 'done','action' => 'rappel', 'id' => $this->post('idReservation')), 200);
+        }else{
+            $this->response(array('status' => 'none','action' => 'rappel', 'id' => $this->post('idReservation')), 200);
+        }
+
+    }
+
 
     
     
