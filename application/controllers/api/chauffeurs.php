@@ -94,6 +94,29 @@ class chauffeurs extends REST_Controller
 
     }
 
+    function terminer_post(){
+
+        if( $this->reservation_model->terminer($this->post("idReservation")) ){
+            $this->response(array('status' => 'done','action' => 'terminer', 'id' => $this->post('idReservation')), 200);
+        }else{
+            $this->response(array('status' => 'none','action' => 'terminer', 'id' => $this->post('idReservation')), 200);
+        }
+
+    }
+
+
+    function test_get(){
+        $apn = "28b8d54cac775b507d8a51c46424b1c12361cd153dfed4442821d3e50a92ca77";
+        $this->load->library('apn');
+        $this->apn->payloadMethod = 'enhance'; // you can turn on this method for debugging purpose
+        $this->apn->connectToPush();
+        $message = "Testing Push Notification !" ;
+        $send_result = $this->apn->sendMessage($apn, $message, /*badge*/ 1, /*sound*/ 'default'  );
+        $this->apn->disconnectPush();
+        $this->response(array('status' => 'Up and Running', 'result' => $send_result), 200);
+
+    }
+
 
     
     

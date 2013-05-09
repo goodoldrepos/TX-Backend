@@ -121,7 +121,7 @@ class User_model extends CI_Model{
 			$r = $q->row();
 			if($r->apn_token != NULL){
 				$data = array(
-               		'apn_token' => '0'
+               		'apn_token' => 'unknown'
             	);
 
 				$this->db->where('id', $id);

@@ -170,12 +170,12 @@ class reservation_model extends CI_Model{
 		$qreservation = $this->db->where('id', $id_reservation)->limit(1)->get('reservations'); 
 		if($qreservation->num_rows > 0){
 
-			$data = array(
+			/*$data = array(
                		'status' => 'feedback', 
             );
 
-			$this->db->update('reservations', $data);
-
+            $this->db->where('id', $id_reservation);
+			$this->db->update('reservations', $data);*/
 
 			$reservation = $qreservation->row();
 			$quser = $this->db->where('id', $reservation->id_utilisateur)->limit(1)->get('utilisateurs');
@@ -187,7 +187,7 @@ class reservation_model extends CI_Model{
 
         		//if the user is logged in on a smartphone then send him push notification
         		if($apn != 'unknown'){
-        			//send APN notification
+        			//send APN notification to iOS
         			$this->load->library('apn');
     				$this->apn->payloadMethod = 'enhance'; // you can turn on this method for debugging purpose
     				$this->apn->connectToPush();
@@ -198,6 +198,25 @@ class reservation_model extends CI_Model{
         			//send an email to the user if he doesn't have our mobile app 
         		}		
            	}
+
+           	return TRUE;
+
+		}else{
+			return FALSE;
+		}
+	}
+
+	function terminer($id_reservation){
+
+		$qreservation = $this->db->where('id', $id_reservation)->limit(1)->get('reservations'); 
+		if($qreservation->num_rows > 0){
+
+			$data = array(
+               		'status' => 'done', 
+            );
+
+            $this->db->where('id', $id_reservation);
+			$this->db->update('reservations', $data);
 
            	return TRUE;
 
