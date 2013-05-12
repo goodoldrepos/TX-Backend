@@ -3,6 +3,8 @@
 class position_model extends CI_Model {
 	
 	public function update_position($id, $lat, $long){
+
+
 		$data = array(
 			'latitude' 		=> $lat, 
 			'longitude' 	=> $long,
@@ -34,7 +36,7 @@ class position_model extends CI_Model {
 		$r = $this->db->get();
 
 		if ( $r->num_rows > 0 ) return $r->result_array();
-    	else return false;
+    	else return NULL;
 
 	}
 

@@ -34,10 +34,11 @@ class chauffeurs extends REST_Controller
     //receive new position from driver and update db
     function position_post(){
   
-        if($r = $this->position_model->update_position($this->post('id'), $this->post('latitude'), $this->post('longitude'))){
+        if($this->position_model->update_position($this->post('id'), $this->post('latitude'), $this->post('longitude')) != NULL){
+            $r = $this->position_model->update_position($this->post('id'), $this->post('latitude'), $this->post('longitude'));
             $this->response(array('status' => 'done', 'reservation' => $r, 'action' => 'updatePosition'), 200);
         }else{
-            $this->response(array('status' => 'error', 'reservation' => 'empty', 'action' => 'updatePosition'), 200);
+            $this->response(array('status' => 'error', 'reservation' => 'empty', 'action' => 'updatePosition', 'id' => $this->post('id'), 'latitude' => $this->post('latitude'), 'longitude' => $this->post('longitude')), 200);
         }
     
     }
