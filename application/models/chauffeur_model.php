@@ -26,9 +26,16 @@ class chauffeur_model extends CI_Model {
         return $q->row();
       }else{
         return false;
-      }
-      
-		
+      }	
+	}
+
+	public function get_all(){
+		$q = $this->db->get('chauffeurs');
+		if($q->num_rows > 0 ){
+			return $q->result();	
+		}else{
+			return null;
+		}
 	}
 
 

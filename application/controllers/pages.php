@@ -6,6 +6,8 @@ class Pages extends CI_Controller {
 		parent::__construct();
 		$this->load->model('reservation_model');
 		$this->load->model('position_model');
+		$this->load->model('chauffeur_model');
+
 	}
 	
 
@@ -97,8 +99,8 @@ class Pages extends CI_Controller {
 			$this->load->model('user_model');
 			$users= $this->user_model->get_all();
 			$reservations = $this->reservation_model->get_all();
-			//$chauffeurs = $this->chauffeur_model->get_all();
-			$data = array( 'users' => $users, 'reservations' => $reservations);
+			$chauffeurs = $this->chauffeur_model->get_all();
+			$data = array( 'users' => $users, 'reservations' => $reservations, 'chauffeurs' => $chauffeurs);
 
 			$this->load->view('templates/header');
 			$this->load->view('pages/admin', $data);

@@ -144,11 +144,20 @@ class reservation_model extends CI_Model{
             			$this->load->library('apn');
         				$this->apn->payloadMethod = 'enhance'; // you can turn on this method for debuggin purpose
         				$this->apn->connectToPush();
-        				$message = "Le Taxi # " . $id_chauffeur . " est en route" ;
+        				$message = "Votre Taxi (# " . $id_chauffeur . ") est en route" ;
         				$send_result = $this->apn->sendMessage($apn, $message, /*badge*/ 1, /*sound*/ 'default'  );
         				$this->apn->disconnectPush();
             		}else{
-            			//send an email to the user if he doesn't have our mobile app 
+            			$this->load->library('email');
+
+						$this->email->from('taxi@braksa.com', 'Taxi Parisien');
+						$this->email->to('qmathematical@gmail.com'); 
+						$this->email->cc('zakaria@braksa.com'); 
+
+						$this->email->subject('Taxi Paris');
+						$this->email->message('Votre taxi est en route.');	
+
+						$this->email->send(); 
             		}		
             	}
 

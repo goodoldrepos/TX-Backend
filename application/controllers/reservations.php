@@ -55,7 +55,7 @@ class Reservations extends CI_Controller{
 		$this->session->unset_userdata('reservation');
 
 
-		$this->load->library('email');
+		/*$this->load->library('email');
 
 		$this->email->from('taxi@braksa.com', 'Taxi Parisien');
 		$this->email->to('qmathematical@gmail.com'); 
@@ -64,9 +64,9 @@ class Reservations extends CI_Controller{
 		$this->email->subject('Email Test');
 		$this->email->message('Testing the email class.');	
 
-		$this->email->send();
+		$this->email->send();*/
 
-		//redireger vers page d'accueil
+		//rediriger vers page d'accueil
 		redirect('pages/home');
 	}
 

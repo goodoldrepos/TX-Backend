@@ -20,9 +20,9 @@
 								<?php foreach($users as $user){ ?>
 								<tr>
 									<td>
-										<a href="<?php echo site_url('users/show') . '/' . $user->id; ?>" >
+										<!--<a href="<?php echo site_url('users/show') . '/' . $user->id; ?>" > -->
 											<?php echo $user->nom . ' ' . $user->prenom; ?>
-										</a>
+										<!--</a>-->
 									</td>
 									<td>
 										<?php echo $user->telephone; ?>
@@ -80,7 +80,27 @@
 						</table>
     				</div>
     				<div class="tab-pane" id="tab3">
-      					
+      					<h2>Liste des chauffeurs</h2>
+      					<table class="table table-bordered table-striped">
+								<thead><th>#</th><th>Chauffeur</th><th>Email</th><th>Num de Telephone</th></thead>
+
+								<?php if(count($chauffeurs) != 0) foreach($chauffeurs as $chauffeur){ ?>
+								<tr>
+									<td>
+										<?php echo $chauffeur->id; ?>
+									</td>
+									<td>
+										<?php echo $chauffeur->prenom . ' ' . $chauffeur->nom; ?>
+									</td>
+									<td>
+										<?php echo $chauffeur->email; ?>
+									</td>
+									<td>
+										<?php echo $chauffeur->telephone; ?>
+									</td>
+								</tr>
+								<?php } ?>
+						</table>
     				</div>
   				</div>
 			</div>
