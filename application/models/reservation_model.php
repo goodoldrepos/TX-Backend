@@ -135,28 +135,48 @@ class reservation_model extends CI_Model{
             	$quser = $this->db->where('id', $reservation->id_utilisateur)->limit(1)->get('utilisateurs');
             	if($quser->num_rows > 0){
             		$user = $quser->row();
-            		//$device_type = $user->device_type(); 
+            		$dtype = $user->device_type; 
             		$apn = $user->apn_token;
 
             		//if the user is logged in on a smartphone then send him push notification
             		if($apn != 'unknown'){
             			//send APN notification
-            			$this->load->library('apn');
-        				$this->apn->payloadMethod = 'enhance'; // you can turn on this method for debuggin purpose
-        				$this->apn->connectToPush();
-        				$message = "Votre Taxi (# " . $id_chauffeur . ") est en route" ;
-        				$send_result = $this->apn->sendMessage($apn, $message, /*badge*/ 1, /*sound*/ 'default'  );
-        				$this->apn->disconnectPush();
+						if($dtype == "ios"){
+							//send iOS notification
+							$this->load->library('apn');
+	        				$this->apn->payloadMethod = 'enhance'; // you can turn on this method for debugging purpose
+	        				$this->apn->connectToPush();
+	        				$message = "Votre Taxi (# " . $id_chauffeur . ") est en route" ;
+	        				$send_result = $this->apn->sendMessage($apn, $message, /*badge*/ 1, /*sound*/ 'default'  );
+	        				$this->apn->disconnectPush();	
+						}elseif{
+
+							        $this->load->library('gcm');
+							        $this->gcm->setMessage('Test message '.date('d.m.Y H:s:i'));
+							        $this->gcm->addRecepient('RegistrationId');
+							        $this->gcm->addRecepient('New reg id');
+							        /*$this->gcm->setData(array(
+							            'some_key' => 'some_val'
+							        ));*/
+														
+							        if ($this->gcm->send())
+							            echo 'Success for all messages';
+							        else
+							            echo 'Some messages have errors';
+
+							    // and see responses for more info
+							        print_r($this->gcm->status);
+									print_r($this->gcm->messagesStatuses);
+
+						}
+            			
             		}else{
             			$this->load->library('email');
-
 						$this->email->from('taxi@braksa.com', 'Taxi Parisien');
 						$this->email->to('qmathematical@gmail.com'); 
 						$this->email->cc('zakaria@braksa.com'); 
-
 						$this->email->subject('Taxi Paris');
 						$this->email->message('Votre taxi est en route.');	
-
 						$this->email->send(); 
             		}		
             	}

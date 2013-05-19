@@ -142,5 +142,20 @@ class User_model extends CI_Model{
 			
 		}
 	}
+	
+	public function device_type($id, $device_type){
+		$q = $this->db->where('id', $id)->limit(1)->get('utilisateurs');
+		if($q->num_rows > 0){
+			$data = array(
+            	'device_type' => $device_type
+            );
+
+			$this->db->where('id', $id);
+			$this->db->update('utilisateurs', $data); 
+			
+		}
+	}
+	
+	
 
 }

@@ -24,8 +24,10 @@ class Example extends REST_Controller
             
             $r = $this->user_model->sign_in( $this->post('email'), $this->post('pwd') );
             $this->user_model->add_apn($r->id, $this->post('apn'));
+            $this->user_model->device_type($r->id, $this->post('devicetype'));
+
             //send response
-            $this->response(array('status' => 'done', 'user_id' => $r->id, 'profil' => $r, 'apn' => $this->post('apn')), 200);
+            $this->response(array('status' => 'done', 'user_id' => $r->id, 'profil' => $r, 'apn' => $this->post('apn'), 'device_type'=> $this->post('devicetype')), 200);
 
         }else{
             //send response

@@ -106,7 +106,7 @@ class chauffeurs extends REST_Controller
     }
 
 
-    function test_get(){
+    function ios_get(){
         $apn = "28b8d54cac775b507d8a51c46424b1c12361cd153dfed4442821d3e50a92ca77";
         $this->load->library('apn');
         $this->apn->payloadMethod = 'enhance'; // you can turn on this method for debugging purpose
@@ -117,6 +117,24 @@ class chauffeurs extends REST_Controller
         $this->response(array('status' => 'Up and Running', 'result' => $send_result), 200);
 
     }
+
+	function android_get(){
+		$this->load->library('gcm');
+        $this->gcm->setMessage('Test 1 2 3');
+        $this->gcm->addRecepient('RegistrationId');
+        /*$this->gcm->setData(array(
+            'some_key' => 'some_val'
+        ));*/
+							
+        if ($this->gcm->send())
+            echo 'Success for all messages';
+        else
+            echo 'Some messages have errors';
+
+    // and see responses for more info
+        print_r($this->gcm->status);
+		print_r($this->gcm->messagesStatuses);
+	}
 
 
     
