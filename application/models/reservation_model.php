@@ -140,33 +140,31 @@ class reservation_model extends CI_Model{
 
             		//if the user is logged in on a smartphone then send him push notification
             		if($apn != 'unknown'){
-            			//send APN notification
+
+						$message = "Votre Taxi #" . $id_chauffeur . " est en route";
+						
 						if($dtype == "ios"){
 							//send iOS notification
 							$this->load->library('apn');
 	        				$this->apn->payloadMethod = 'enhance'; // you can turn on this method for debugging purpose
 	        				$this->apn->connectToPush();
-	        				$message = "Votre Taxi (# " . $id_chauffeur . ") est en route" ;
 	        				$send_result = $this->apn->sendMessage($apn, $message, /*badge*/ 1, /*sound*/ 'default'  );
-	        				$this->apn->disconnectPush();	
-						}elseif{
-
-							        $this->load->library('gcm');
-							        $this->gcm->setMessage('Test message '.date('d.m.Y H:s:i'));
-							        $this->gcm->addRecepient('RegistrationId');
-							        $this->gcm->addRecepient('New reg id');
-							        /*$this->gcm->setData(array(
-							            'some_key' => 'some_val'
-							        ));*/
-														
-							        if ($this->gcm->send())
-							            echo 'Success for all messages';
-							        else
-							            echo 'Some messages have errors';
-
-							    // and see responses for more info
-							        print_r($this->gcm->status);
-									print_r($this->gcm->messagesStatuses);
+	        				$this->apn->disconnectPush();
+		
+						}elseif($dtype == "android"){
+							
+							//send android notification 
+					        $this->load->library('gcm');
+					        $this->gcm->setMessage($message);
+					        $this->gcm->addRecepient($apn);
+					        /*$this->gcm->setData(array(
+					            'some_key' => 'some_val'
+					        ));*/
+												
+					       	$this->gcm->send();
+					           
+					        //print_r($this->gcm->status);
+							//print_r($this->gcm->messagesStatuses);
 
 						}
             			

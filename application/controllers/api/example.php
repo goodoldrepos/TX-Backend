@@ -12,17 +12,18 @@ class Example extends REST_Controller
         $this->load->model('reservation_model');
     }
 
+	function test_get()
+    {
+        $this->response(array('action' => "tralalalala", 'status' => "done"), 200);
+
+    }
+
     //verifies if the login/password are correct
     function login_post(){
 
-        if(!$this->post('email') || !$this->post('pwd'))
-        {
-            $this->response(array('status' => 'Erreur Format'), 200);
-        }
-
         if($this->user_model->sign_in($this->post('email'), $this->post('pwd'))){
             
-            $r = $this->user_model->sign_in( $this->post('email'), $this->post('pwd') );
+            $r = $this->user_model->sign_in($this->post('email'), $this->post('pwd'));
             $this->user_model->add_apn($r->id, $this->post('apn'));
             $this->user_model->device_type($r->id, $this->post('devicetype'));
 
@@ -122,9 +123,6 @@ class Example extends REST_Controller
         
     }
     
-    function test_get()
-    {
-        $this->response("Up", 200); 
-    }
+    
 
 }

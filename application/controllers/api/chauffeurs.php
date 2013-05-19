@@ -121,7 +121,7 @@ class chauffeurs extends REST_Controller
 	function android_get(){
 		$this->load->library('gcm');
         $this->gcm->setMessage('Test 1 2 3');
-        $this->gcm->addRecepient('RegistrationId');
+        $this->gcm->addRecepient($this->get("apn"));
         /*$this->gcm->setData(array(
             'some_key' => 'some_val'
         ));*/

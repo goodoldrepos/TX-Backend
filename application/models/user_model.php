@@ -119,14 +119,12 @@ class User_model extends CI_Model{
 		$q = $this->db->where('id', $id)->limit(1)->get('utilisateurs');
 		if($q->num_rows > 0){
 			$r = $q->row();
-			if($r->apn_token != NULL){
-				$data = array(
-               		'apn_token' => 'unknown'
-            	);
+			$data = array(
+           		'apn_token' => 'unknown'
+        	);
 
-				$this->db->where('id', $id);
-				$this->db->update('utilisateurs', $data); 
-			}
+			$this->db->where('id', $id);
+			$this->db->update('utilisateurs', $data);
 		}
 	}
 
@@ -154,6 +152,10 @@ class User_model extends CI_Model{
 			$this->db->update('utilisateurs', $data); 
 			
 		}
+	}
+	
+	public function test(){
+		return "true";
 	}
 	
 	
