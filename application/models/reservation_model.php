@@ -144,6 +144,7 @@ class reservation_model extends CI_Model{
 						$message = "Votre Taxi #" . $id_chauffeur . " est en route";
 						
 						if($dtype == "ios"){
+							
 							//send iOS notification
 							$this->load->library('apn');
 	        				$this->apn->payloadMethod = 'enhance'; // you can turn on this method for debugging purpose
@@ -209,18 +210,31 @@ class reservation_model extends CI_Model{
 
 			if($quser->num_rows > 0){
         		$user = $quser->row();
-        		//$device_type = $user->device_type; 
+        		$dtype = $user->device_type; 
         		$apn = $user->apn_token;
+
 
         		//if the user is logged in on a smartphone then send him push notification
         		if($apn != 'unknown'){
-        			//send APN notification to iOS
-        			$this->load->library('apn');
-    				$this->apn->payloadMethod = 'enhance'; // you can turn on this method for debugging purpose
-    				$this->apn->connectToPush();
-    				$message = "Votre Taxi est là !" ;
-    				$send_result = $this->apn->sendMessage($apn, $message, /*badge*/ 1, /*sound*/ 'default'  );
-    				$this->apn->disconnectPush();
+        			if($dtype == "ios"){
+						$message = "Votre Taxi est là !" ;
+						//send iOS notification
+						$this->load->library('apn');
+        				$this->apn->payloadMethod = 'enhance'; // you can turn on this method for debugging purpose
+        				$this->apn->connectToPush();
+        				$send_result = $this->apn->sendMessage($apn, $message, /*badge*/ 1, /*sound*/ 'default'  );
+        				$this->apn->disconnectPush();
+	
+					}elseif($dtype == "android"){
+						$message = "Votre Taxi est la !" ;
+						//send android notification 
+				        $this->load->library('gcm');
+				        $this->gcm->setMessage($message);
+				        $this->gcm->addRecepient($apn);										
+				       	$this->gcm->send();
+
+
+					}
         		}else{
         			//send an email to the user if he doesn't have our mobile app 
         		}		
