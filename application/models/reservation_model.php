@@ -85,6 +85,7 @@ class reservation_model extends CI_Model{
 	}
 
 	//cancel a reservation
+	//$id : reservation id 
 	public function delete($id, $status = "done"){
 		$data = array( 'status' => $status );
 		$this->db->where('id', $id);
@@ -232,7 +233,6 @@ class reservation_model extends CI_Model{
 				        $this->gcm->setMessage($message);
 				        $this->gcm->addRecepient($apn);										
 				       	$this->gcm->send();
-
 
 					}
         		}else{

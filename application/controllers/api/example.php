@@ -38,6 +38,7 @@ class Example extends REST_Controller
     }
 
     //sign out
+	//$this->post('id') : user id
     function logout_post(){
         $this->user_model->remove_apn($this->post('id'));
         $this->response(array('status' => 'done', 'action' => 'removeAPNToken'), 200);
@@ -85,6 +86,7 @@ class Example extends REST_Controller
     }
 
     //get any current reservation (if there is one)
+	//$this->get('id') : user id
     function reservation_get(){
 
         $r = $this->reservation_model->get_current_reservation($this->get('id'));
@@ -99,6 +101,7 @@ class Example extends REST_Controller
     }
 
     //user can cancel reservation
+	//$this->get('id') : reservation id
     function cancelReservation_get(){
         $this->reservation_model->delete($this->get('id'));
         $this->response(array('action' => 'cancelReservation', 'status' => 'done'), 200);
