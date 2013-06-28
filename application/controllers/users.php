@@ -16,7 +16,7 @@ class Users extends CI_Controller{
       	$this->form_validation->set_rules('motdepasse', 'Mot de passe', 'required|min_length[4]');
 
       	if ( $this->form_validation->run() !== false ) {
-         // then validation passed. Get from db
+         // then validation passed. Insert to DB
          	$id = $this
                   ->user_model
                   ->create_user($this->input->post('nom'),
@@ -26,6 +26,7 @@ class Users extends CI_Controller{
                   				$this->input->post('motdepasse')
                	  );
 
+         	$this->session->set_userdata('role', "client");
          	$this->session->set_userdata('user_id', $id);
          	$this->session->set_userdata('username', $this->input->post('nom') . " " . $this->input->post('prenom'));
             redirect('pages/home');

@@ -17,13 +17,10 @@ class Pages extends CI_Controller {
 
 		//si l'utilisateur est connecté
 		if($this->session->userdata('user_id')){
-
 			//si l'utilisateur a remplie le formulaire sur la page d'accueil
 			if($this->session->userdata('reservation')){
-
 				$data = $this->session->userdata('reservation');
 				$this->load->view("reservations/valider_reservation", $data);
-
 			}
 			elseif($this->session->userdata('role') == 'client'){
 				$this->load->view("pages/home_in"); 	

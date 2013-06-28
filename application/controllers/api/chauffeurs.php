@@ -58,9 +58,9 @@ class chauffeurs extends REST_Controller
 
     }
 
-    //ask to cancel reservation 
+    //Le chauffeur can't make it ! so he gonna let someone else take care of that reservation 
     function cancelReservation_post(){
-        if($this->reservation_model->delete($this->post('idReservation'), 'accepted' ))
+        if($this->reservation_model->delete($this->post('idReservation'), 'pending' ))
         {
             $this->response(array('status' => 'done','id' => $this->post('idReservation'), 'action' => 'cancelReservation'), 200);
         }
@@ -85,6 +85,7 @@ class chauffeurs extends REST_Controller
         }
     }
 
+	//rappeler client que vous êtes là
     function rappel_post(){
 
         if( $this->reservation_model->rappel($this->post("idReservation")) ){
@@ -95,6 +96,7 @@ class chauffeurs extends REST_Controller
 
     }
 
+	//reservation terminée
     function terminer_post(){
 
         if( $this->reservation_model->terminer($this->post("idReservation")) ){
@@ -109,7 +111,7 @@ class chauffeurs extends REST_Controller
     function ios_get(){
         $apn = "28b8d54cac775b507d8a51c46424b1c12361cd153dfed4442821d3e50a92ca77";
         $this->load->library('apn');
-        $this->apn->payloadMethod = 'enhance'; // you can turn on this method for debugging purpose
+        $this->apn->payloadMethod = 'enhance'; 
         $this->apn->connectToPush();
         $message = "Testing Push Notification !" ;
         $send_result = $this->apn->sendMessage($apn, $message, /*badge*/ 1, /*sound*/ 'default'  );

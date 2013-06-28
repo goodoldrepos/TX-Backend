@@ -37,6 +37,7 @@ class Chauffeurs extends CI_Controller {
 			$id = $this->chauffeur_model->create_chauffeur($data);
 
 			$this->session->set_userdata('user_id', $id);
+         	$this->session->set_userdata('role', "chauffeur");
 
 			redirect('chauffeurs/home');
 
