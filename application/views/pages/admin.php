@@ -117,7 +117,13 @@
 										<?php echo $chauffeur->num_carte_pro; ?>
 									</td>
 									<td>
-										<?php echo $chauffeur->valide; ?>
+										<?php if($chauffeur->valide == "pending"){ ?>
+											<?php echo "<a href=". site_url('chauffeurs/activer/'). "/" . $chauffeur->id .">Valider</a>"; ?>
+										<?php }elseif($chauffeur->valide == "ignored"){ ?>
+											<?php echo "<a href=". site_url('chauffeurs/activer/'). "/" . $chauffeur->id .">Réactiver</a>"; ?>
+										<?php }elseif($chauffeur->valide == "active"){ ?>
+											<?php echo "<a href=". site_url('chauffeurs/ignorer/'). "/" . $chauffeur->id .">Désactiver</a>"; ?>
+										<?php } ?>
 									</td>
 								</tr>
 								<?php } ?>

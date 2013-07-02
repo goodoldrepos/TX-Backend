@@ -84,7 +84,7 @@ class Users extends CI_Controller{
 		
 	}
 
-	//afficher le profil utilisateur
+	//afficher le profil de l'utilisateur
 	public function show($id){
 			
 		$user = $this->user_model->get_user($id);
@@ -102,7 +102,7 @@ class Users extends CI_Controller{
 
 	}
 
-	//modifier le profil utilisateur depuis la page "gestion du compte"
+	//modifier le profil utilisateur depuis la page "gestion du compte" (sans modifier le mot de passe)
 	public function update($id = NULL){
 
 		$this->session->set_userdata('feedback', NULL);
@@ -155,6 +155,7 @@ class Users extends CI_Controller{
 		
 	}
 
+	//verifier si l'email est valide
 	public function email_check($email)
 	{
 
@@ -169,6 +170,7 @@ class Users extends CI_Controller{
 		}
 	}
 
+	//verifier que le mot de passe est valide
 	public function password_check($pwd)
 	{
 
@@ -183,6 +185,7 @@ class Users extends CI_Controller{
 		}
 	}
 
+	//recuperer une liste de tous les utilisateurs inscris
 	public function all(){
 		$users= $this->user_model->get_all();
 		$data = array( 'users' => $users);
@@ -192,12 +195,13 @@ class Users extends CI_Controller{
 		$this->load->view('templates/footer');
 	}
 
-
+	//supprimer un utilisateur
 	public function destroy($id){
 		$this->user_model->delete($id);
 		redirect('pages/admin');
 	}
 
+	//grant to a user admin role
 	public function admin($id){
 		//$this->user_model->make_admin($id);
 	}

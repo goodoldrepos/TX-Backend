@@ -13,10 +13,9 @@ class chauffeur_model extends CI_Model {
 	}
 
 	public function sign_in($email, $password){
-
 		$q = $this
             ->db
-            ->select('date_created, nom, prenom, telephone, email, id')
+            ->select('date_created, nom, prenom, telephone, email, id, valide, num_carte_pro, licence')
             ->where('email', $email)
             ->where('motdepasse', sha1($password))
             ->limit(1)

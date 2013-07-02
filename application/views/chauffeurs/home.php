@@ -15,9 +15,6 @@
 <br/>
 <br/>
 
-
-
-
 <script type="text/javascript">getMap(); //charger the map. </script>
 
 <div class="container">

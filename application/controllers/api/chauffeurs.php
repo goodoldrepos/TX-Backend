@@ -16,11 +16,17 @@ class chauffeurs extends REST_Controller
     //verifies if the login/password are correct
     function connecter_post(){
 
-
         if($this->chauffeur_model->sign_in($this->post('email'), $this->post('pwd'))){
             $r = $this->chauffeur_model->sign_in( $this->post('email'), $this->post('pwd') );
             //send response
-            $this->response(array('status' => 'done', 'user_id' => $r->id, 'profil' => $r), 200);
+			if($r->valide == "pending"){
+				$this->response(array('status' => 'pending', 'user_id' => $r->id, 'profil' => "Votre compte n'as pas ete active encore"), 200);
+			}elseif($r->valide == "ignored"){
+				$this->response(array('status' => 'ignored', 'user_id' => $r->id, 'message' => "Votre demande n'etait pas accepter par nos administrateurs"), 200);  
+			}else{
+				$this->response(array('status' => 'done', 'user_id' => $r->id, 'profil' => $r), 200);  
+			}
+
 
         }else{
             //send response
