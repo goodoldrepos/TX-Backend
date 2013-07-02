@@ -18,7 +18,14 @@ class Chauffeurs extends CI_Controller {
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('nom', 'Nom', 'required');
-		//$this->form_validation->set_rules('adresse', 'Adresse', 'required');
+		$this->form_validation->set_rules('prenom', 'Prénom', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		$this->form_validation->set_rules('motdepasse', 'Mot de passe', 'required|min_length[6]');
+		$this->form_validation->set_rules('telephone', 'Téléphone', 'required');
+		$this->form_validation->set_rules('adresse', 'Adresse', 'required');
+		$this->form_validation->set_rules('num_carte_pro', 'Numéro Carte Pro', 'required');
+		$this->form_validation->set_rules('licence', 'Licence Taxi', 'required');
+		
 
       	if ( $this->form_validation->run() !== false ) {
 
@@ -31,6 +38,11 @@ class Chauffeurs extends CI_Controller {
                 'nom' 			=>    $this->input->post('nom'),
                 'prenom' 		=>    $this->input->post('prenom'),
                 'telephone' 	=>    $this->input->post('telephone'),
+                'adresse' 		=>    $this->input->post('adresse'),
+                'num_carte_pro' =>    $this->input->post('num_carte_pro'),
+                'smartphone' 	=>    $this->input->post('smartphone'),
+                'licence' 		=>    $this->input->post('licence'),
+                'valide' 		=>    "pending"
 			);
 
 			//créer nouveau profil chauffeur
@@ -44,7 +56,7 @@ class Chauffeurs extends CI_Controller {
 
       	}else{
       		$this->load->view('templates/header');
-      		$this->load->view('pages/chauffeurs');
+      		$this->load->view('chauffeurs/create');
       		$this->load->view('templates/footer');
       	}
 		

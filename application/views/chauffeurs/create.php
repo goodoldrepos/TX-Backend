@@ -19,16 +19,12 @@
 			<input type="text" class="input-block-level" name="telephone" placeholder="" />
 			<label>Mot de passe</label>
   			<input type="password" class="input-block-level" name="motdepasse" placeholder="" />
-  			<label>Addresse</label>
+  			<label>Adresse</label>
  			<input type="text" class="input-block-level" name="adresse" placeholder="" />
- 			<label>Numéro de Stationnement</label>
-			<input type="text" class="input-block-level" name="num_stationnement" placeholder="" />
 			<label>Numéro Carte Pro</label>
 			<input type="text" class="input-block-level" name="num_carte_pro" placeholder="" />
-			<label>Immatriculation</label>
-			<input type="text" class="input-block-level" name="immatriculation" placeholder="" />
-			<label>Commune Exercice</label>
-			<input type="text" class="input-block-level" name="commune_exercice" placeholder="" />
+			<label>Licence Taxi</label>
+			<input type="text" class="input-block-level" name="licence" placeholder="" />
     		<input type="submit" class="btn btn-success" value="Continuer" >
 			<br/><br/>
     	<?php echo form_close() ?>	

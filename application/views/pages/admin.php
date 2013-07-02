@@ -82,7 +82,16 @@
     				<div class="tab-pane" id="tab3">
       					<h2>Liste des chauffeurs</h2>
       					<table class="table table-bordered table-striped">
-								<thead><th>#</th><th>Chauffeur</th><th>Email</th><th>Num de Telephone</th></thead>
+								<thead>
+									<th>#</th>
+									<th>Chauffeur</th>
+									<th>Email</th>
+									<th>Adresse</th>
+									<th>Num de Telephone</th>
+									<th>Licence Taxi</th>
+									<th>Num carte pro</th>
+									<th>Statut</th>		
+								</thead>
 
 								<?php if(count($chauffeurs) != 0) foreach($chauffeurs as $chauffeur){ ?>
 								<tr>
@@ -96,7 +105,19 @@
 										<?php echo $chauffeur->email; ?>
 									</td>
 									<td>
+										<?php echo $chauffeur->adresse; ?>
+									</td>
+									<td>
 										<?php echo $chauffeur->telephone; ?>
+									</td>
+									<td>
+										<?php echo $chauffeur->licence; ?>
+									</td>
+									<td>
+										<?php echo $chauffeur->num_carte_pro; ?>
+									</td>
+									<td>
+										<?php echo $chauffeur->valide; ?>
 									</td>
 								</tr>
 								<?php } ?>

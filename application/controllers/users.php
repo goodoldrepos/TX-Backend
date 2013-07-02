@@ -13,7 +13,7 @@ class Users extends CI_Controller{
 		$this->form_validation->set_rules('prenom', 'Prenom', 'required');
 		$this->form_validation->set_rules('telephone', 'Telephone', 'required');
       	$this->form_validation->set_rules('email', 'Adresse Email', 'valid_email|required|is_unique[utilisateurs.email]');
-      	$this->form_validation->set_rules('motdepasse', 'Mot de passe', 'required|min_length[4]');
+      	$this->form_validation->set_rules('motdepasse', 'Mot de passe', 'required|min_length[6]');
 
       	if ( $this->form_validation->run() !== false ) {
          // then validation passed. Insert to DB
