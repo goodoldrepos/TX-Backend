@@ -13,7 +13,11 @@ class chauffeurs extends REST_Controller
         $this->load->model('reservation_model');
     }
 
-    //verifies if the login/password are correct
+    //Permet d'athentifier un chauffeur 
+	//@return "notAllowed", s'il existe deja un chauffeur qui est connected avec la même licence
+	//@return "pending", si le compte n'as pas etait valider par un admin
+	//@return "ignored", si un admin a deja verifier le compte et a decider de le rejeter
+	//@return "error", si email ou/et mot de passe ne sont pas correctes 
     function connecter_post(){
 
 
@@ -42,12 +46,13 @@ class chauffeurs extends REST_Controller
    
     }
 
+	//Assures la deconnexion d'un chauffeur pour qu'il laisse place aux autres chauffeurs qui veulent utiliser le systeme avec la meme licence
 	function deconnecter_get(){
 		$this->chauffeur_model->set_offline($this->get('idChauffeur'));
 		$this->response(array('status' => 'done','id' => $this->get('idChauffeur'), 'action' => 'disconnectChauffeur'), 200);
 	}
 
-    //receive new position from driver and update db
+    //Receive new position from driver and update db
     function position_post(){
   
         if($this->position_model->update_position($this->post('id'), $this->post('latitude'), $this->post('longitude')) != NULL){
@@ -60,7 +65,7 @@ class chauffeurs extends REST_Controller
     }
 
 
-    //receive accept request from driver and check if that's ok
+    //Receive accept request from driver and check if that's ok
     function acceptReservation_post(){
 
         if($this->reservation_model->validate_reservation($this->post('idReservation'), $this->post('idChauffeur'))){
@@ -154,6 +159,7 @@ class chauffeurs extends REST_Controller
 		print_r($this->gcm->messagesStatuses);
 	}
 	
+	//Juste pour tester qu'il n'y a pas d'erreur de syntaxe qlq part dans ce web service
 	function test_get(){
 		echo "Test Test 1 2 3 " . $this->get("name");
 	}
