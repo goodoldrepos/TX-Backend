@@ -16,26 +16,36 @@ class chauffeurs extends REST_Controller
     //verifies if the login/password are correct
     function connecter_post(){
 
-        if($this->chauffeur_model->sign_in($this->post('email'), $this->post('pwd'))){
+
+        if( $this->chauffeur_model->is_not_allowed($this->post('email')) ){
+			$this->response(array('status' => 'notAllowed', 'message' => "Il se peut qu'il y a un autre chauffeur qui est connecté avec la même licence que vous."), 200);  
+		
+		}elseif( $this->chauffeur_model->sign_in($this->post('email'), $this->post('pwd')) ){
+			
+			//recuperer taxi driver infos
             $r = $this->chauffeur_model->sign_in( $this->post('email'), $this->post('pwd') );
-            //send response
+            $this->chauffeur_model->set_online($r->id);
+
+            //make few tests and send response 
 			if($r->valide == "pending"){
-				$this->response(array('status' => 'pending', 'user_id' => $r->id, 'profil' => "Votre compte n'as pas ete active encore"), 200);
+				$this->response(array('status' => 'pending', 'user_id' => $r->id, 'message' => "Votre compte n'as pas ete active encore"), 200);
 			}elseif($r->valide == "ignored"){
 				$this->response(array('status' => 'ignored', 'user_id' => $r->id, 'message' => "Votre demande n'etait pas accepter par nos administrateurs"), 200);  
 			}else{
 				$this->response(array('status' => 'done', 'user_id' => $r->id, 'profil' => $r), 200);  
 			}
 
-
         }else{
             //send response
-            $this->response(array('status' => 'Error Auth', 'email' => $this->post('email'), 'pwd' => $this->post('pwd')), 200);
+            $this->response(array('status' => 'error', 'email' => $this->post('email'), 'pwd' => $this->post('pwd')), 200);
         }
    
     }
 
-
+	function deconnecter_get(){
+		$this->chauffeur_model->set_offline($this->get('idChauffeur'));
+		$this->response(array('status' => 'done','id' => $this->get('idChauffeur'), 'action' => 'disconnectChauffeur'), 200);
+	}
 
     //receive new position from driver and update db
     function position_post(){
@@ -142,6 +152,10 @@ class chauffeurs extends REST_Controller
     // and see responses for more info
         print_r($this->gcm->status);
 		print_r($this->gcm->messagesStatuses);
+	}
+	
+	function test_get(){
+		echo "Test Test 1 2 3 " . $this->get("name");
 	}
 
 

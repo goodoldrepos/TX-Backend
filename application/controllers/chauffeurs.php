@@ -36,7 +36,7 @@ class Chauffeurs extends CI_Controller {
 				if($res->valide == "pending"){
 					echo "Vous allez recevoir un mail une fois votre compte activé";
 				}elseif($res->valide == "ignored"){
-					echo "Vous allez recevoir un mail une fois votre compte activé";
+					echo "Votre compte n'as pas était activé";
 				}elseif($res->valide == "active"){
 					$this->session->set_userdata('user_id', $res->id);
 	                $this->session->set_userdata('username', $res->nom . " " . $res->prenom);
